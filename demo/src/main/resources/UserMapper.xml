@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.demo.User">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="avatar" property="avatar"/>
+        <result column="email" property="email"/>
+        <result column="password" property="email"/>
+        <result column="status" property="status"/>
+        <result column="created" property="created"/>
+        <result column="last_login" property="lastLogin"/>
+    </resultMap>
+
+    <select id="getUser" resultType="com.example.demo.User">
+        SELECT * FROM m_user where id = #{id};
+    </select>
+
+</mapper>
