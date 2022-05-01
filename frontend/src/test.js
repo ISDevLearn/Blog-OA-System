@@ -124,11 +124,6 @@ class Game extends React.Component {
 }
 
 
-
-
-
-
-
 function App() {
   return (
   <>
