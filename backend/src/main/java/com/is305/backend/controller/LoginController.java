@@ -23,18 +23,22 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/login")
+    @PostMapping("/login/")
     public String login(HttpServletResponse response, @RequestParam("username") String username, @RequestParam("password") String password) {
         User user = userService.getUserByUsername(username);
-        if (Arrays.equals(user.getPassword(), UserUtil.hashPassword(password))) {
+        if (user == null) {
+            throw new UsernameOrPasswordErrorException();
+        } else if (Arrays.equals(user.getPassword(), UserUtil.hashPassword(password))) {
             Cookie cookie = new Cookie("username", user.getUsername());
             cookie.setMaxAge(24 * 60 * 60);
             response.addCookie(cookie);
-            cookie = new Cookie("token", LoginUtil.bytes2String(user.getToken()));
+            byte[] token = LoginUtil.getRandomToken();
+            cookie = new Cookie("token", LoginUtil.bytesToString(token));
             cookie.setMaxAge(24 * 60 * 60);
             response.addCookie(cookie);
             user.setLastLogin(new Date());
-            user.setToken(LoginUtil.getRandomToken());
+            user.setToken(token);
+            userService.updateUserLastLoginAndToken(new Date(), token, username);
             return "Login successfully!";
         } else {
             throw new UsernameOrPasswordErrorException();

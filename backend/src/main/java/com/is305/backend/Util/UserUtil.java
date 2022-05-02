@@ -1,14 +1,16 @@
 package com.is305.backend.Util;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
 public class UserUtil {
 
     static public byte[] hashPassword(String password) {
-        byte[] token = new byte[0x10];
+        byte[] token = null;
         try {
-            SecureRandom.getInstanceStrong().nextBytes(token);
+            token = MessageDigest.getInstance("md5").digest(password.getBytes(StandardCharsets.UTF_8));
         } catch (NoSuchAlgorithmException ignored) {
         }
         return token;

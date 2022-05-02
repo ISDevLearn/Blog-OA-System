@@ -36,12 +36,18 @@ public class UserInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if (request.getMethod().equals("POST") && request.getRequestURI().equals("/user/")) {
+            return true;
+        }
         Cookie[] cookies = request.getCookies();
+        if (cookies == null) {
+            throw new NoLoginException();
+        }
         byte[] token = null;
         String username = null;
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("token")) {
-                token = LoginUtil.string2Bytes(cookie.getValue());
+                token = LoginUtil.stringToBytes(cookie.getValue());
             } else if (cookie.getName().equals("username")) {
                 username = cookie.getValue();
             }

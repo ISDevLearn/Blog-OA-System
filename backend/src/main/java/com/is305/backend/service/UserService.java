@@ -18,9 +18,10 @@ public class UserService {
     /**
      * <p>Create a user based on the assigned values.</p>
      * <p>The left values are assigned by default.</p>
+     *
      * @param username username
-     * @param avatar avatar
-     * @param email email
+     * @param avatar   avatar
+     * @param email    email
      * @param password password
      */
     public void createUser(String username, byte[] avatar, String email, String password) {
@@ -58,19 +59,11 @@ public class UserService {
      */
     public void updateByUsername(String username, byte[] avatar, String email, String password, String oldUsername) {
         User oldUser = userMapper.getUserByUserName(oldUsername);
-        User user = new User();
-        username = username == null ? oldUser.getUsername() : username;
-        avatar = avatar == null ? oldUser.getAvatar() : avatar;
-        email = email == null ? oldUser.getEmail() : email;
-        byte[] passwordDigest = password == null ? oldUser.getPassword() : UserUtil.hashPassword(password);
-        user.setUsername(username);
-        user.setAvatar(avatar);
-        user.setEmail(email);
-        user.setPassword(passwordDigest);
-        user.setStatus(oldUser.getStatus());
-        user.setCreated(oldUser.getCreated());
-        user.setLastLogin(oldUser.getLastLogin());
-        user.setToken(oldUser.getToken());
+        userMapper.updateUserByUserName(username == null ? oldUser.getUsername() : username, avatar == null ? oldUser.getAvatar() : avatar, email == null ? oldUser.getEmail() : email, password == null ? oldUser.getPassword() : UserUtil.hashPassword(password), oldUser.getStatus(), oldUser.getCreated(), oldUser.getLastLogin(), oldUser.getToken(), oldUsername);
+    }
+
+    public void updateUserLastLoginAndToken(Date lastLogin, byte[] token, String username) {
+        userMapper.updateUserLastLoginAndToken(lastLogin, token, username);
     }
 
 }
