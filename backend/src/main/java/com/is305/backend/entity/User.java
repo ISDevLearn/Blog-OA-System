@@ -7,7 +7,6 @@ import java.util.Date;
 
 @Data
 public class User implements Serializable {
-
     private String username;
     private byte[] avatar;
     private String email;
@@ -15,7 +14,7 @@ public class User implements Serializable {
     private boolean status;
     private Date created;
     private Date lastLogin;
-    private byte[] Token;
+    private byte[] token;
 
     public void setStatus(boolean status) {
         this.status = status;

@@ -18,7 +18,7 @@ public class LoginUtil {
         return token;
     }
 
-    static public byte[] string2Bytes(String hex) throws IllegalHexException {
+    static public byte[] stringToBytes(String hex) throws IllegalHexException {
         byte b = 0;
         boolean flag = false;
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -43,7 +43,7 @@ public class LoginUtil {
         return outputStream.toByteArray();
     }
 
-    static public String bytes2String(byte[] bytes) {
+    static public String bytesToString(byte[] bytes) {
         StringBuilder builder = new StringBuilder();
         for (byte b : bytes) {
             byte[] bs = {(byte) (((int) b & 0xff) / 0x10), (byte) (((int) b & 0xff) % 0x10)};

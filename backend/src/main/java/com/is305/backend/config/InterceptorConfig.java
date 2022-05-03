@@ -1,6 +1,6 @@
 package com.is305.backend.config;
 
-import com.is305.backend.Interceptor.LoginInterceptor;
+import com.is305.backend.Interceptor.UserInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -11,12 +11,12 @@ import javax.annotation.Resource;
 public class InterceptorConfig implements WebMvcConfigurer {
 
     @Resource
-    LoginInterceptor loginInterceptor;
+    UserInterceptor userInterceptor;
 
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         WebMvcConfigurer.super.addInterceptors(registry);
-        registry.addInterceptor(loginInterceptor).addPathPatterns("/user/*");
+        registry.addInterceptor(userInterceptor).addPathPatterns("/user/*");
     }
 }
