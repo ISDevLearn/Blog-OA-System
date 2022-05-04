@@ -1,49 +1,184 @@
-//import logo from './logo.svg';
-//import './App.css';
+import React, { Component } from "react";
+import { Route, Switch, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
-const getage = ()=>{
-return 18;
+import * as actions from "./store/actions/index";
+import cssClass from "./App.css";
+import Layout from "./hoc/Layout/Layout";
+import PostList from "./containers/PostList/PostList";
+import PostBody from "./containers/PostBody/PostBody";
+import asyncComponent from "./hoc/asyncComponent/asyncComponent";
+
+const asyncLogin = asyncComponent(() => {
+    return import("./containers/Login/Login");
+});
+
+const asyncDashboard = asyncComponent(() => {
+    return import("./containers/Dashboard/Dashboard");
+});
+
+const asyncAdminPanel = asyncComponent(() => {
+    return import("./containers/AdminPanel/AdminPanel");
+});
+
+const asyncCreatePost = asyncComponent(() => {
+    return import("./containers/CreatePost/CreatePost");
+});
+
+const asyncPostListDashboard = asyncComponent(() => {
+    return import("./containers/Dashboard/PostList/PostList");
+});
+
+const asyncUserProfileView = asyncComponent(() => {
+    return import("./containers/Dashboard/UserProfileView/UserProfileView");
+});
+
+const asyncUserProfileEdit = asyncComponent(() => {
+    return import("./containers/Dashboard/UserProfileEdit/UserProfileEdit");
+});
+
+const asyncAdminUserList = asyncComponent(() => {
+    return import("./containers/AdminPanel/UserList/UserList");
+});
+
+const asyncAdminCreateUser = asyncComponent(() => {
+    return import("./containers/AdminPanel/CreateUser/CreateUser");
+});
+
+const asyncAdminViewAllPosts = asyncComponent(() => {
+    return import("./containers/AdminPanel/PostList/PostList");
+});
+
+const asyncPostEdit = asyncComponent(() => {
+    return import("./containers/Dashboard/PostEdit/PostEdit");
+});
+
+const asyncAdminEditUser = asyncComponent(() => {
+    return import("./containers/AdminPanel/EditUser/EditUser");
+});
+
+const asyncAdminEditPost = asyncComponent(() => {
+    return import("./containers/AdminPanel/EditPost/EditPost");
+});
+
+const asyncAdminPostCommentsList = asyncComponent(() => {
+    return import("./containers/AdminPanel/PostCommentsList/PostCommentsList");
+});
+
+const asyncAdminAllCommentsList = asyncComponent(() => {
+    return import("./containers/AdminPanel/AllCommentsList/AllCommentsList");
+});
+
+const asyncAdminCommentEdit = asyncComponent(() => {
+    return import("./containers/AdminPanel/CommentEdit/CommentEdit");
+});
+
+const asyncUserRegistration = asyncComponent(() => {
+    return import("./containers/UserRegistartion/UserRegistration");
+});
+
+class App extends Component {
+    componentDidMount() {
+        this.props.onCheckAuthStatus();
+    }
+
+    render() {
+        const routesForLoggedInUsers = (
+            <Switch>
+                <Route
+                    path="/admin-panel/comments/edit/:pk"
+                    component={asyncAdminCommentEdit}
+                />
+                <Route
+                    path="/admin-panel/comments/list/all"
+                    component={asyncAdminAllCommentsList}
+                />
+                <Route
+                    path="/admin-panel/comments/list/:slug"
+                    component={asyncAdminPostCommentsList}
+                />
+                <Route
+                    path="/admin-panel/posts/detail/:slug"
+                    component={asyncAdminEditPost}
+                />
+                <Route
+                    path="/admin-panel/users/detail/:pk"
+                    component={asyncAdminEditUser}
+                />
+                <Route path="/:slug/edit" component={asyncPostEdit} />
+                <Route
+                    path="/admin-panel/all-posts"
+                    component={asyncAdminViewAllPosts}
+                />
+                <Route
+                    path="/admin-panel/create-user"
+                    component={asyncAdminCreateUser}
+                />
+                <Route
+                    path="/admin-panel/user-list"
+                    component={asyncAdminUserList}
+                />
+                {this.props.isUserProfile ? (
+                    <Route
+                        path="/dashboard/profile/edit"
+                        component={asyncUserProfileEdit}
+                    />
+                ) : null}
+                <Route
+                    path="/dashboard/profile"
+                    component={asyncUserProfileView}
+                />
+                <Route
+                    path="/dashboard/post-list"
+                    component={asyncPostListDashboard}
+                />
+                <Route
+                    path="/dashboard/create-new-post"
+                    component={asyncCreatePost}
+                />
+                <Route path="/admin-panel" component={asyncAdminPanel} />
+                <Route path="/dashboard" component={asyncDashboard} />
+                <Route path="/posts/view/:slug/" component={PostBody} />
+                <Route path="/" component={PostList} />
+            </Switch>
+        );
+
+        const routesForAnonymousUsers = (
+            <Switch>
+                <Route path="/register" component={asyncUserRegistration} />
+                <Route path="/login" component={asyncLogin} />
+                <Route path="/posts/view/:slug/" component={PostBody} />
+                <Route path="/" component={PostList} />
+            </Switch>
+        );
+        return (
+            <div className={cssClass.App}>
+                <Layout>
+                    {this.props.isAuth
+                        ? routesForLoggedInUsers
+                        : routesForAnonymousUsers}
+                </Layout>
+            </div>
+        );
+    }
 }
-// 三原式
-const flag = true
-// 列表渲染
-// 重复渲染是什么就return什么属性
-// 用id作为key（number类型）为了提高diff性能
-// key仅仅显示在react内部，在网页审查时候看不到，即不在渲染结果中
 
-const blogs =[
-{ID: 1, name: 'how to develop your blog index'},
-{ID: 2, name: 'how to list all your blog in a timeline'},
-{ID: 3, name: 'use md2html to display your blog' }
-]
+const mapStateToProps = state => {
+    return {
+        isAuth: state.auth.token !== null,
+        isUserProfile: state.user.userProfile !== null
+    };
+};
 
-function App() {
-  return (
-    <div className="App">
-     { getage () }
-     { flag ? 'yes' : 'no' }
-     <ul>
-        {blogs.map(blogs=> <li key={blogs.id}> {blogs.name}</li>)}
-     </ul>
-    </div>
-  )
-}
+const mapDispatchToProps = dispatch => {
+    return {
+        onCheckAuthStatus: () => dispatch(actions.authLoginCheckState())
+    };
+};
 
-export default App;
-
-
-
-// <header className="App-header">
-//        <img src={logo} className="App-logo" alt="logo" />
-//        <p>
-//          Edit <code>src/App.js</code> and save to reload.
-//        </p>
-//        <a
-//          className="App-link"
-//          href="https://reactjs.org"
-//          target="_blank"
-//          rel="noopener noreferrer"
-//        >
-//          Learn React
-//        </a>
-//      </header>
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(App)
+);
