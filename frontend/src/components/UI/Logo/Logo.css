@@ -12,7 +12,7 @@
     position: fixed;
     z-index: 100;
 }
-
+  /*Cardo*/
 @media (max-width: 390px) {
     .Logo {
         font-size: 25px;

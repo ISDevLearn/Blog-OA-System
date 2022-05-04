@@ -22,23 +22,41 @@ import UserReducer from "./store/reducers/user";
 import AdminReducer from "./store/reducers/admin";
 import CommentReducer from "./store/reducers/comment";
 
-// 渲染根组件到id为root的dom节点上
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
 
+//const root = ReactDOM.createRoot(document.getElementById('root'));
+//root.render(
 // 去除严格模式节点
 //  <React.StrictMode>
-    <App />
+//    <App />
 //  </React.StrictMode>
-)
+//)
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const rootStore = combineReducers({
+    auth: AuthReducer,
+    post: PostReducer,
+    user: UserReducer,
+    admin: AdminReducer,
+    comment: CommentReducer
+});
 
+const store = createStore(rootStore, composeEnhancers(applyMiddleware(thunk)));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 
+// 渲染根组件到id为root的dom节点上
+ReactDOM.render(
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById("root")
+);
+registerServiceWorker();
 
-// reportWebVitals();
+

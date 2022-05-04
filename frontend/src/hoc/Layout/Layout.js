@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Aux from "../ReactAux/ReactAux";
 import Toobar from "../../components/UI/Toolbar/Toolbar";
 import Sidebar from "../../components/UI/Sidebar/Sidebar";
-//import Logo from "../../components/UI/Logo/Logo";
+import Logo from "../../components/UI/Logo/Logo";
 import Backdrop from "../../components/UI/Backdrop/Backdrop";
 
 class Layout extends Component {
@@ -24,7 +24,7 @@ class Layout extends Component {
     render() {
         return (
             <Aux>
-
+                <Logo />
                 <Toobar
                     clicked={this.SidebarToggleHandler}
                     isAuth={this.props.isAuth}
