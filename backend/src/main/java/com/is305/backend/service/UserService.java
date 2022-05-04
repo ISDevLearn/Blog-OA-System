@@ -59,7 +59,11 @@ public class UserService {
      */
     public void updateByUsername(String username, byte[] avatar, String email, String password, String oldUsername) {
         User oldUser = userMapper.getUserByUserName(oldUsername);
-        userMapper.updateUserByUserName(username == null ? oldUser.getUsername() : username, avatar == null ? oldUser.getAvatar() : avatar, email == null ? oldUser.getEmail() : email, password == null ? oldUser.getPassword() : UserUtil.hashPassword(password), oldUser.getStatus(), oldUser.getCreated(), oldUser.getLastLogin(), oldUser.getToken(), oldUsername);
+        userMapper.updateUserByUserName(username == null ? oldUser.getUsername() : username,
+                                        avatar == null ? oldUser.getAvatar() : avatar,
+                                        email == null ? oldUser.getEmail() : email,
+                                        password == null ? oldUser.getPassword() : UserUtil.hashPassword(password),
+                                        oldUser.getStatus(), oldUser.getCreated(), oldUser.getLastLogin(), oldUser.getToken(), oldUsername);
     }
 
     public void updateUserLastLoginAndToken(Date lastLogin, byte[] token, String username) {
