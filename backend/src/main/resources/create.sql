@@ -14,3 +14,10 @@ CREATE TABLE IF NOT EXISTS `m_user`
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 3
   DEFAULT CHARSET = utf8mb3;
+
+CREATE TABLE IF NOT EXISTS `m_follower`
+(
+    `follower` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+    `following` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+    PRIMARY KEY (`follower`, `following`)
+)

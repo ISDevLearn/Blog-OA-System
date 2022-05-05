@@ -1,5 +1,6 @@
 package com.is305.backend.service;
 
+import com.is305.backend.Exception.UserCreatedException;
 import com.is305.backend.Util.LoginUtil;
 import com.is305.backend.Util.UserUtil;
 import com.is305.backend.entity.User;
@@ -25,7 +26,15 @@ public class UserService {
      * @param password password
      */
     public void createUser(String username, byte[] avatar, String email, String password) {
-        userMapper.createUser(username, avatar, email, UserUtil.hashPassword(password), false, new Date(), new Date(), LoginUtil.getRandomToken());
+        try {
+            userMapper.createUser(username, avatar, email, UserUtil.hashPassword(password), false, new Date(), new Date(), LoginUtil.getRandomToken());
+        } catch (Exception exception) {
+            try {
+                throw exception.getCause();
+            } catch (Throwable throwable) {
+                throw new UserCreatedException();
+            }
+        }
     }
 
     public void deleteUser(User user) {
@@ -34,13 +43,6 @@ public class UserService {
 
     public void deleteUserByUsername(String username) {
         userMapper.deleteUserByUserName(username);
-    }
-
-    /**
-     * <p>Clean all of the users in the table.</p>
-     */
-    public void clearUsers() {
-        userMapper.clearUsers();
     }
 
     public User getUserByUsername(String username) {
@@ -60,10 +62,10 @@ public class UserService {
     public void updateByUsername(String username, byte[] avatar, String email, String password, String oldUsername) {
         User oldUser = userMapper.getUserByUserName(oldUsername);
         userMapper.updateUserByUserName(username == null ? oldUser.getUsername() : username,
-                                        avatar == null ? oldUser.getAvatar() : avatar,
-                                        email == null ? oldUser.getEmail() : email,
-                                        password == null ? oldUser.getPassword() : UserUtil.hashPassword(password),
-                                        oldUser.getStatus(), oldUser.getCreated(), oldUser.getLastLogin(), oldUser.getToken(), oldUsername);
+                avatar == null ? oldUser.getAvatar() : avatar,
+                email == null ? oldUser.getEmail() : email,
+                password == null ? oldUser.getPassword() : UserUtil.hashPassword(password),
+                oldUser.getStatus(), oldUser.getCreated(), oldUser.getLastLogin(), oldUser.getToken(), oldUsername);
     }
 
     public void updateUserLastLoginAndToken(Date lastLogin, byte[] token, String username) {
