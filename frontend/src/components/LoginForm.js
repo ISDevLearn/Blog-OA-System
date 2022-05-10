@@ -2,14 +2,20 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import '../css/login.css'
+import { useStore } from "../store";
 
 
 // 登录组件
 const LoginForm = () => {
+    const { loginStore } = useStore()
     // 用户点击登录后的回调
     // TODO: 登录的处理函数
     const onFinish = (values) => {
         console.log('Success:', values);
+        loginStore.getToken({
+            username: values.username,
+            password: values.password
+        })
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -23,6 +29,10 @@ const LoginForm = () => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
+            initialValues={{
+                username: '',
+                password: '',
+            }}
         >
             <Form.Item
                 label="用户名"
