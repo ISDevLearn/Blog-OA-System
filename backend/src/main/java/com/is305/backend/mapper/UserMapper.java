@@ -8,7 +8,7 @@ import java.util.Date;
 @Mapper
 public interface UserMapper {
 
-    @Insert("INSERT INTO m_user VALUES(#{username},#{avatar},#{email},#{password}," + "#{status},#{created},#{last_login},#{token});")
+    @Insert("INSERT INTO m_user VALUES(#{username},#{avatar},#{email},#{password},#{status},#{created},#{last_login},#{token});")
     void createUser(@Param("username") String username, @Param("avatar") byte[] avatar, @Param("email") String email, @Param("password") byte[] password, @Param("status") boolean status, @Param("created") Date created, @Param("last_login") Date lastLogin, @Param("token") byte[] token);
 
     @Delete("DELETE FROM m_user WHERE username=#{username};")

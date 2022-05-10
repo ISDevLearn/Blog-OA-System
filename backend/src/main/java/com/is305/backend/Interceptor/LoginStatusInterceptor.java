@@ -3,9 +3,11 @@ package com.is305.backend.Interceptor;
 import com.is305.backend.Exception.ExpirationException;
 import com.is305.backend.Exception.IllegalLoginException;
 import com.is305.backend.Exception.NoLoginException;
+import com.is305.backend.Exception.NoTargetUserException;
 import com.is305.backend.Util.LoginUtil;
 import com.is305.backend.entity.User;
 import com.is305.backend.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -17,11 +19,11 @@ import java.util.Arrays;
 import java.util.Date;
 
 @Component
-public class UserInterceptor implements HandlerInterceptor {
+public class LoginStatusInterceptor implements HandlerInterceptor {
 
     static final long EXPIRATION_MS = 24L * 60 * 60 * 60 * 1000;
 
-    @Resource
+    @Autowired
     UserService userService;
 
     /**
@@ -31,7 +33,7 @@ public class UserInterceptor implements HandlerInterceptor {
      * @param request  request
      * @param response response
      * @param handler  handler
-     * @return whether the request is legal
+     * @return super method
      * @throws Exception exception
      */
     @Override
@@ -57,6 +59,10 @@ public class UserInterceptor implements HandlerInterceptor {
             throw new NoLoginException();
         } else {
             User user = userService.getUserByUsername(username);
+            if (user == null) {
+                // If the user doesn't exist, throw the exception to warn the handler.
+                throw new NoTargetUserException();
+            }
             Date now = new Date();
             if (!Arrays.equals(user.getToken(), token)) {
                 // If the token doesn't match the one stored in the database, this request is illegal.
