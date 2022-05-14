@@ -16,6 +16,11 @@ public class ExceptionHandlingController {
         return new ResponseEntity<>("This user has been created before.", HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler({BlogCreatedException.class})
+    public  ResponseEntity<String> blogCreatedFailed(){
+        return new ResponseEntity<>("Blog created failed.", HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler({UsernameOrPasswordErrorException.class})
     public ResponseEntity<String> usernameOrPasswordError() {
         return new ResponseEntity<>("The username or password is wrong.", HttpStatus.UNAUTHORIZED);
