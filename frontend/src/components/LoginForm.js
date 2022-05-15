@@ -1,4 +1,5 @@
 import { Form, Input, Button, Checkbox } from 'antd';
+import React from 'react';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import '../css/login.css'
@@ -10,7 +11,6 @@ const LoginForm = () => {
     // TODO: 登录的处理函数
     const onFinish = (values) => {
         console.log('Success:', values);
-        })
     };
 
     const onFinishFailed = (errorInfo) => {
