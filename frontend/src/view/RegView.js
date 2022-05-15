@@ -1,9 +1,9 @@
 import React from 'react';
-import LoginForm from '../components/LoginForm';
+import RegForm from '../components/RegForm';
 import { withRouter } from "react-router-dom";
 
 
-class LoginView extends React.Component{
+class RegView extends React.Component{
 
 
     render(){
@@ -11,9 +11,9 @@ class LoginView extends React.Component{
             <div className="login-page">
                 <div className="login-container">
                     <div className="login-box">
-                        <h1 className="page-title">登录</h1>
+                        <h1 className="page-title">注册</h1>
                         <div className="login-content">
-                            <LoginForm />
+                            <RegForm />
                         </div>
                     </div>
                 </div>
@@ -23,4 +23,4 @@ class LoginView extends React.Component{
     }
 }
 
-export default withRouter(LoginView);
+export default withRouter(RegView);

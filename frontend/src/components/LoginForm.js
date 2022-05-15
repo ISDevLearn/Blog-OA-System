@@ -2,6 +2,7 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import '../css/login.css'
+import {Link} from "react-router-dom";
 
 
 // 登录组件
@@ -10,7 +11,6 @@ const LoginForm = () => {
     // TODO: 登录的处理函数
     const onFinish = (values) => {
         console.log('Success:', values);
-        })
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -100,7 +100,7 @@ const LoginForm = () => {
                     登录
                 </Button>&nbsp;
                 {/*TODO: 这里后面要加上跳转到注册页面的路由*/}
-                没有账号？&nbsp;<a href="">点我注册</a>
+                没有账号？&nbsp;<Link to={'/register'}>点我注册</Link>
             </Form.Item>
         </Form>
     );
