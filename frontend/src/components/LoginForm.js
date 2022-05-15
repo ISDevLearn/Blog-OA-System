@@ -1,5 +1,6 @@
 import { Form, Input, Button, Checkbox } from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
+import {history} from "../utils/history";
 import 'antd/dist/antd.css';
 import '../css/login.css'
 import {Link} from "react-router-dom";
@@ -16,6 +17,10 @@ const LoginForm = () => {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
+    const handleGoRegister = () => {
+        history.push('/register');
+    }
 
     return (
         <Form
@@ -100,7 +105,7 @@ const LoginForm = () => {
                     登录
                 </Button>&nbsp;
                 {/*TODO: 这里后面要加上跳转到注册页面的路由*/}
-                没有账号？&nbsp;<Link to={'/register'}>点我注册</Link>
+                没有账号？&nbsp;<Button onClick={handleGoRegister.bind(this)} type="link">去注册</Button>
             </Form.Item>
         </Form>
     );

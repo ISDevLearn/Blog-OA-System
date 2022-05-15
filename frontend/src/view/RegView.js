@@ -23,4 +23,4 @@ class RegView extends React.Component{
     }
 }
 
-export default withRouter(RegView);
+export default RegView;

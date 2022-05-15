@@ -9,6 +9,7 @@ import {
 import 'antd/dist/antd.css';
 import '../css/login.css'
 import {Link} from "react-router-dom";
+import {history} from "../utils/history";
 
 const formItemLayout = {
     labelCol: {
@@ -50,6 +51,10 @@ const RegistrationForm = () => {
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
     };
+
+    const handleGoLogin = () => {
+        history.push('/login');
+    }
     
     const getCode = () => {
 
@@ -168,7 +173,7 @@ const RegistrationForm = () => {
                 <Button type="primary" htmlType="submit">
                     注册
                 </Button>&nbsp;
-                已有账号？ &nbsp;<Link to={'/login'}>登录</Link>
+                已有账号？ &nbsp;<Button onClick={handleGoLogin.bind(this)} type="link">登录</Button>
             </Form.Item>
         </Form>
     );
