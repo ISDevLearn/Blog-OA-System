@@ -1,7 +1,6 @@
 import React from 'react';
 import { Router, Route, Switch, Redirect} from 'react-router-dom';
 // import PrivateRoute from './PrivateRoute'
-import LoginRoute from  './LoginRoute'
 // import HomeView from "./view/HomeView";
 // import HomeLayout from "./view/HomeLayout"
 import RegView from '../view/RegView'

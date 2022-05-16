@@ -4,12 +4,12 @@ import {
     Input,
     Row,
     Col,
-    Button,
+    Button, message,
 } from 'antd';
 import 'antd/dist/antd.css';
 import '../css/login.css'
-import {Link} from "react-router-dom";
 import {history} from "../utils/history";
+import AuthService from "../service/AuthService";
 
 const formItemLayout = {
     labelCol: {
@@ -49,6 +49,19 @@ const RegistrationForm = () => {
     const [sendCodeHidden, setSendCodeHidden] = useState(false)
 
     const onFinish = (values) => {
+        AuthService.register(
+            values.username,
+            values.email,
+            values.password
+        ).then(res => {
+            message.success('注册成功，请登录~', 1)
+            console.log('register success!')
+        },  error => {
+            const resMessage = (error.response && error.response.data && error.response.data.message) ||
+                error.message || error.toString();
+            message.error(resMessage, 1)
+            console.log(resMessage)
+        });
         console.log('Received values of form: ', values);
     };
 

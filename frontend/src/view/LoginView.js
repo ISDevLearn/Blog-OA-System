@@ -1,7 +1,5 @@
 import React from 'react';
 import LoginForm from '../components/LoginForm';
-import { withRouter } from "react-router-dom";
-
 
 class LoginView extends React.Component{
 

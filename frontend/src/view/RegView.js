@@ -1,7 +1,5 @@
 import React from 'react';
 import RegForm from '../components/RegForm';
-import { withRouter } from "react-router-dom";
-
 
 class RegView extends React.Component{
 

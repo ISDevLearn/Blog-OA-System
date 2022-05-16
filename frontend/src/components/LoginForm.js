@@ -1,9 +1,9 @@
-import { Form, Input, Button, Checkbox } from 'antd';
+import {Form, Input, Button, Checkbox, message} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {history} from "../utils/history";
 import 'antd/dist/antd.css';
 import '../css/login.css'
-import {Link} from "react-router-dom";
+import AuthService from "../service/AuthService";
 
 
 // 登录组件
@@ -11,7 +11,21 @@ const LoginForm = () => {
     // 用户点击登录后的回调
     // TODO: 登录的处理函数
     const onFinish = (values) => {
-        console.log('Success:', values);
+        // console.log('Success:', values);
+        AuthService.login(values.username, values.password).then(
+            () => {
+                message.success("登录成功！", 1)
+                console.log('login success!')
+                // TODO: 跳转到用户首页,路径写在引号里面
+                // history.push("")
+                // window.location.reload()
+            },
+            error => {
+                const resMessage = (error.response && error.response.data && error.response.data.message)
+                    || error.message || error.toString();
+                message.error(resMessage, 1)
+                console.log(resMessage)
+            })
     };
 
     const onFinishFailed = (errorInfo) => {
