@@ -11,8 +11,8 @@ class AuthService {
             )
             .then(response => {
                 console.log(response)
-                if (response.data) {
-                    localStorage.setItem("user", JSON.stringify(response.data));
+                if (document.cookie) {
+                    localStorage.setItem('user', JSON.stringify(document.cookie));
                 }
 
                 return response.data;
@@ -21,7 +21,7 @@ class AuthService {
 
     logout() {
         axios.get(API_URL + "/logout/")
-            .then(res => {localStorage.removeItem("user");})
+            .then(res => {localStorage.removeItem('user');})
     }
 
     register(username, email, password) {

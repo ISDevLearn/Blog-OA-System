@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
-import {
-    Form,
-    Input,
-    Row,
-    Col,
-    Button, message,
-} from 'antd';
+import {Form, Input, Row, Col, Button, message} from 'antd';
 import 'antd/dist/antd.css';
 import '../css/login.css'
 import {history} from "../utils/history";
 import AuthService from "../service/AuthService";
+import {LockOutlined, MailOutlined, UserOutlined} from "@ant-design/icons";
 
 const formItemLayout = {
     labelCol: {
@@ -94,9 +89,19 @@ const RegistrationForm = () => {
                         message: '请输入用户名!',
                         whitespace: true,
                     },
+                    () => ({
+                        validator(_, value) {
+                            // 用户名长度小于12位
+                            if (!value || value.length <= 12) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject(new Error('用户名过长！'));
+                        }
+                    }),
                 ]}
             >
-                <Input />
+                <Input prefix={<UserOutlined className="site-form-item-icon" />}
+                       placeholder="用户名"/>
             </Form.Item>
 
             <Form.Item
@@ -113,7 +118,10 @@ const RegistrationForm = () => {
                     },
                 ]}
             >
-                <Input />
+                <Input
+                    prefix={<MailOutlined className="site-form-item-icon" />}
+                    placeholder="邮箱"
+                />
             </Form.Item>
 
             <Form.Item
@@ -124,10 +132,21 @@ const RegistrationForm = () => {
                         required: true,
                         message: '请输入密码!',
                     },
+                    () => ({
+                        validator(_, value) {
+                            // 密码在6至18位之间
+                            if (!value || (value.length >= 6 && value.length <= 18)) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject(new Error('密码不合法！'));
+                        },
+                    }),
                 ]}
                 hasFeedback
             >
-                <Input.Password />
+                <Input.Password prefix={<LockOutlined className="site-form-item-icon" />}
+                                type="password"
+                                placeholder="密码"/>
             </Form.Item>
 
             <Form.Item
@@ -151,7 +170,9 @@ const RegistrationForm = () => {
                     }),
                 ]}
             >
-                <Input.Password />
+                <Input.Password prefix={<LockOutlined className="site-form-item-icon" />}
+                                type="password"
+                                placeholder="密码"/>
             </Form.Item>
 
             <Form.Item label="验证码">
