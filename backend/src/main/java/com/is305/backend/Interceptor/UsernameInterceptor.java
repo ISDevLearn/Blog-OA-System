@@ -1,6 +1,7 @@
 package com.is305.backend.Interceptor;
 
 import com.is305.backend.Exception.IllegalQueryException;
+import com.is305.backend.Util.CookieUtil;
 import com.is305.backend.service.FollowerService;
 import com.is305.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +32,11 @@ public class UsernameInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Cookie[] cookies = request.getCookies();
+        Cookie cookie = CookieUtil.getUsernameInCookie(request.getCookies());
         String username = request.getParameter("username");
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("username")) {
-                if (cookie.getValue().equals(username)) {
-                    // If the usernames match, return.
-                    return HandlerInterceptor.super.preHandle(request, response, handler);
-                } else {
-                    // Else it'll break and throw an exception.
-                    break;
-                }
-            }
+        if (cookie != null && cookie.getValue().equals(username)) {
+            // If the usernames match, return.
+            return HandlerInterceptor.super.preHandle(request, response, handler);
         }
         throw new IllegalQueryException();
     }

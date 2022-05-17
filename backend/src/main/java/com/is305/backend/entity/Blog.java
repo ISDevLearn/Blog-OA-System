@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 @Data
 public class Blog implements Serializable {
-    private int id;
+    private long id;
     private String username;
     private String title;
     private String description;
