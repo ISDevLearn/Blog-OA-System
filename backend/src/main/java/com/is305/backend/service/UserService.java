@@ -37,10 +37,6 @@ public class UserService {
         }
     }
 
-    public void deleteUser(User user) {
-        userMapper.deleteUserByUserName(user.getUsername());
-    }
-
     public void deleteUserByUsername(String username) {
         userMapper.deleteUserByUserName(username);
     }
