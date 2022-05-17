@@ -9,9 +9,9 @@ import navList from '../right/NavList'
 // import SvgIcon from '@/components/SvgIcon'
 import { MenuOutlined, SearchOutlined } from '@ant-design/icons'
 
-export const HEADER_BLOG_NAME = 'Test'
+export const HEADER_BLOG_NAME = 'Ayaka'
 
-const HeaderLeft = props => {
+const Index = props => {
     const [keyword, setKeyword] = useState('')
     const history = useHistory()
 
@@ -72,4 +72,4 @@ const HeaderLeft = props => {
     )
 }
 
-export default HeaderLeft
+export default Index
