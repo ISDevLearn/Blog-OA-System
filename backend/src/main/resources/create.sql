@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `m_user`
 (
     `username`   varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-    `avatar`     blob,
+    `avatar`     mediumblob,
     `email`      varchar(64)                                            NOT NULL,
     `password`   binary(16)                                             NOT NULL,
     `status`     tinyint                                                NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `m_follower`
     PRIMARY KEY (`follower`, `following`)
 );
 
-CREATE TABLE `m_blog`
+CREATE TABLE IF NOT EXISTS `m_blog`
 (
     `id`          bigint(20)    NOT NULL AUTO_INCREMENT,
     `username`    varchar(64)   CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,

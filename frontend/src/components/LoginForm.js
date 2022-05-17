@@ -17,7 +17,7 @@ const LoginForm = () => {
                 message.success("登录成功！", 1)
                 console.log('login success!')
                 // TODO: 跳转到用户首页,路径写在引号里面
-                // history.push("")
+                history.push(`/home/${values.username}`)
                 // window.location.reload()
             },
             error => {

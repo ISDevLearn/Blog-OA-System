@@ -1,6 +1,8 @@
 package com.is305.backend.controller;
 
 import com.is305.backend.Exception.*;
+import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
+import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,12 +14,12 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public class ExceptionHandlingController {
 
     @ExceptionHandler({UserCreatedException.class})
-    public ResponseEntity<String> userHasBeenCreated(SQLIntegrityConstraintViolationException exception) {
-        return new ResponseEntity<>("This user has been created before.", HttpStatus.NOT_FOUND);
+    public ResponseEntity<String> userHasBeenCreated() {
+        return new ResponseEntity<>("This user has been created before.", HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler({BlogCreatedException.class})
-    public  ResponseEntity<String> blogCreatedFailed(){
+    public ResponseEntity<String> blogCreatedFailed() {
         return new ResponseEntity<>("Blog created failed.", HttpStatus.NOT_FOUND);
     }
 
@@ -28,7 +30,7 @@ public class ExceptionHandlingController {
 
     @ExceptionHandler({NoLoginException.class, ExpirationException.class, IllegalLoginException.class})
     public ResponseEntity<String> loginStatusError() {
-        return new ResponseEntity<>("The user login status is wrong.", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("The user login status is wrong.", HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler({NoTargetUserException.class})
@@ -44,6 +46,11 @@ public class ExceptionHandlingController {
     @ExceptionHandler({IllegalQueryException.class})
     public ResponseEntity<String> illegalQueryException() {
         return new ResponseEntity<>("This is an illegal query.", HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler({FileSizeLimitExceededException.class, MysqlDataTruncation.class})
+    public ResponseEntity<String> fileSizeLimitExceeded() {
+        return new ResponseEntity<>("The file size is too large.", HttpStatus.FORBIDDEN);
     }
 
 }

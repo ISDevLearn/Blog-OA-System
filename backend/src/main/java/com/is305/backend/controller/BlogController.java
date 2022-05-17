@@ -28,12 +28,12 @@ public class BlogController {
         return new ResponseEntity<>("Create the blog successfully!", HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Blog> getBlogById(@PathVariable("id") int id) {
         return new ResponseEntity<>(blogService.getBlogById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/{username}")
+    @GetMapping("/username/{username}")
     public  ResponseEntity<List<Blog>> getBlogByUsername(@PathVariable("username") String username){
         return new ResponseEntity<>(blogService.getBlogByUsername(username), HttpStatus.OK);
     }
