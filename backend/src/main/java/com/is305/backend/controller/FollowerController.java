@@ -21,7 +21,7 @@ public class FollowerController {
         return new ResponseEntity<>("Follow successfully!", HttpStatus.OK);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("")
     public ResponseEntity<String> cancelFollowing(@RequestParam("follower") String follower, @RequestParam("following") String following) {
         followerService.cancelFollowing(follower, following);
         return new ResponseEntity<>("Cancel following successfully!", HttpStatus.OK);
