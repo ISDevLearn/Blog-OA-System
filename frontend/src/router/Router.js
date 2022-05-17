@@ -7,7 +7,7 @@ import RegView from '../view/RegView'
 import LoginView from '../view/LoginView'
 import NotFound from "../view/PageNotFound";
 import {history} from "../utils/history";
-// import BookView from "./view/BookView";
+import HomeLayout from "../view/Home";
 
 
 class BasicRoute extends React.Component{
@@ -17,7 +17,7 @@ class BasicRoute extends React.Component{
                 <Switch>
                     <Route exact path="/login" component={LoginView} />
                     <Route exact path="/register" component={RegView} />
-                    {/*<PrivateRoute path="/" component={HomeLayout} />*/}
+                    <Route exact path="/home" component={HomeLayout} />
                     <Redirect from="/" to="/login" exact/>
                     <Route component={NotFound} />
                 </Switch>
