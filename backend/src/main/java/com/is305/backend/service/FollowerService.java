@@ -31,6 +31,8 @@ public class FollowerService {
                 }
             }
         } else {
+            System.out.println(follower);
+            System.out.println(following);
             throw new NoTargetUserException();
         }
     }
