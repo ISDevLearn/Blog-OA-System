@@ -17,16 +17,16 @@ public interface BlogMapper {
                    @Param("status") boolean status);
 
     @Delete("DELETE FROM m_blog WHERE id=#{id};")
-    void deleteBlogById(@Param("id") int id);
+    void deleteBlogById(@Param("id") long id);
 
     @Delete("DELETE FROM m_blog;")
     void clearBlogs();
 
     @Select("SELECT * FROM m_blog WHERE id=#{id};")
-    Blog getBlogById(@Param("id") int id);
+    Blog getBlogById(@Param("id") long id);
 
     @Update("UPDATE m_blog SET title=#{title},description=#{description},content=#{content},status=#{status} WHERE id=#{id};")
-    void updateBlogById(@Param("id") int id,
+    void updateBlogById(@Param("id") long id,
                         @Param("title") String title,
                         @Param("description") String description,
                         @Param("content")String content,

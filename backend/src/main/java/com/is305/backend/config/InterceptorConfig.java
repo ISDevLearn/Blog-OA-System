@@ -20,7 +20,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         WebMvcConfigurer.super.addInterceptors(registry);
-        registry.addInterceptor(loginStatusInterceptor).addPathPatterns("/user/*").addPathPatterns("/follower/*");
-        registry.addInterceptor(usernameInterceptor).addPathPatterns("/follower/*");
+        registry.addInterceptor(loginStatusInterceptor).addPathPatterns("/user/**").addPathPatterns("/follower/**").addPathPatterns("/blog/**");
+        registry.addInterceptor(usernameInterceptor).addPathPatterns("/follower/**");
     }
 }
