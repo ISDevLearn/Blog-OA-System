@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import {history} from "../../utils/history";
 // import { SIDEBAR } from '@/config'
 
 // import { useSelector } from 'react-redux'
@@ -6,8 +7,10 @@ import React, { useEffect, useState } from 'react'
 // components
 import { Link } from 'react-router-dom'
 // import Href from '@/components/Href'
-import { Divider, Tag } from 'antd'
+import { Divider, Tag , Card} from 'antd'
+import { TeamOutlined } from '@ant-design/icons';
 import UserService from "../../service/UserService";
+import FollowService from "../../service/FollowService";
 
 import { Alert } from 'antd'
 // import { ANNOUNCEMENT } from '@/config'
@@ -16,15 +19,13 @@ import { Alert } from 'antd'
 
 export const SIDEBAR = {
     avatar: require('../../assets/images/avatar.jpg'), // 侧边栏头像
-    title: '种菜的小朋友', // 标题
-    subTitle: 'Carpe diem', // 子标题
-    // 个人主页
-    homepages: {
-        github: {
+    // 关注的信息
+    follows: {
+        follower: {
             link: 'https://test',
             // icon: <GithubFill className='homepage-icon' />
         },
-        juejin: {
+        following: {
             link: 'https://test',
             // icon: <SvgIcon type='iconjuejin' className='homepage-icon' />
         }
@@ -57,14 +58,29 @@ function SideBar(props) {
     // })
     const username = props.match.params.loginUsername
     const [email, setEmail] = useState()
-    const [avatar, serAvatar] = useState()
+    const [avatar, setAvatar] = useState()
+    const [followersNum, setFollowersNum] = useState()
+    const [followingsNum, setFollowingsNum] = useState()
     useEffect(() => {UserService.getUserInfo(username).then(
         res => {
             console.log(res)
             setEmail(res.data.email)
-            serAvatar(res.data.avatar)
+            setAvatar(res.data.avatar)
         }
-    )}, [])
+        )}, [])
+
+    useEffect(() => {FollowService.getFollowers(username).then(
+        res => {
+            // console.log(res.data)
+            setFollowersNum(res.data.length)
+        })},[])
+
+    useEffect(() => {FollowService.getFollowings(username).then(
+        res => {
+            // console.log(res.data)
+            setFollowingsNum(res.data.length)
+        })},[])
+
 
     return (
         <aside className='app-sidebar'>
@@ -73,14 +89,12 @@ function SideBar(props) {
                 <img src={SIDEBAR.avatar} className='sider-avatar' alt='' />}
             <h2 className='title'>{username}</h2>
             <h5 className='sub-title'>{email}</h5>
-            {/*TODO: 这里要写followers和following， 类似github*/}
             <ul className='home-pages'>
-                {Object.entries(SIDEBAR.homepages).map(([linkName, item]) => (
-                    <li key={linkName}>
-                        {item.icon}
-                        {/*<Href href={item.link}>{linkName}</Href>*/}
-                    </li>
-                ))}
+                <Card style={{ width: 300 }}>
+                    {/* TODO: 点击followers跳转到关注者界面，点击followings跳转到被关注者界面，*/}
+                    <li onClick={() => {history.push('')}}><TeamOutlined style={{ marginRight: 15 }} />{followersNum} followers</li>
+                    <li onClick={() => {history.push('')}}><TeamOutlined style={{ marginRight: 15 }} />{followingsNum} following</li>
+                </Card>
             </ul>
 
             {/*{ANNOUNCEMENT.enable && <Alert message={ANNOUNCEMENT.content} type='info' />}*/}
@@ -102,6 +116,7 @@ function SideBar(props) {
                 {/*    </Tag>*/}
                 {/*))}*/}
             </div>
+
             <Divider orientation='left'>友情连接</Divider>
             <ul className='tag-list'>
                 {Object.entries(SIDEBAR.friendslink).map(([linkName, item]) => (
