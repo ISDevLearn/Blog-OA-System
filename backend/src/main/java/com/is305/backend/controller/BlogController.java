@@ -23,20 +23,23 @@ public class BlogController {
 
     @PostMapping("/")
     public ResponseEntity<String> createBlog(HttpServletRequest request, @NotNull @RequestParam("username") String username, @NotNull @RequestParam("title") String title, @NotNull @RequestParam("description") String description, @NotNull @RequestParam("content") String content) {
-        checkLegalUsername(request, username);
+        Cookie cookie = CookieUtil.getUsernameInCookie(request.getCookies());
+        if (cookie == null) {
+            throw new IllegalQueryException();
+        } else if (!username.equals(cookie.getValue())) {
+            throw new IllegalQueryException();
+        }
         blogService.createBlog(username, title, description, content);
         return new ResponseEntity<>("Create the blog successfully!", HttpStatus.OK);
     }
 
     @GetMapping("/id/{id}")
     public ResponseEntity<Blog> getBlogById(HttpServletRequest request, @PathVariable("id") long id) {
-        checkLegalId(request, id);
         return new ResponseEntity<>(blogService.getBlogById(id), HttpStatus.OK);
     }
 
     @GetMapping("/username/{username}")
     public ResponseEntity<List<Blog>> getBlogByUsername(HttpServletRequest request, @PathVariable("username") String username) {
-        checkLegalUsername(request, username);
         return new ResponseEntity<>(blogService.getBlogByUsername(username), HttpStatus.OK);
     }
 
@@ -58,22 +61,13 @@ public class BlogController {
         }
     }
 
-    private void checkLegalId(HttpServletRequest request, @RequestParam("id") long id) {
+    private void checkLegalId(HttpServletRequest request, long id) {
         Cookie cookie = CookieUtil.getUsernameInCookie(request.getCookies());
         if (cookie == null) {
             throw new IllegalQueryException();
         }
         String username = blogService.getBlogById(id).getUsername();
         if (username == null || !username.equals(cookie.getValue())) {
-            throw new IllegalQueryException();
-        }
-    }
-
-    private void checkLegalUsername(HttpServletRequest request, String username) {
-        Cookie cookie = CookieUtil.getUsernameInCookie(request.getCookies());
-        if (cookie == null) {
-            throw new IllegalQueryException();
-        } else if (!username.equals(cookie.getValue())) {
             throw new IllegalQueryException();
         }
     }

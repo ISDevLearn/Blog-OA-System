@@ -22,24 +22,24 @@ public class StarController {
 
     @GetMapping("")
     public ResponseEntity<String> setStar(@RequestParam("id") long id, @RequestParam("username") String username) {
-        starService.setStar(id,username);
+        starService.setStar(id, username);
         return new ResponseEntity<>("Star successfully!", HttpStatus.OK);
     }
 
     @DeleteMapping("")
     public ResponseEntity<String> cancelStar(@RequestParam("id") long id, @RequestParam("username") String username) {
-        starService.cancelStar(id,username);
+        starService.cancelStar(id, username);
         return new ResponseEntity<>("Cancel star successfully!", HttpStatus.OK);
     }
 
     @GetMapping("/username")
     public ResponseEntity<List<Blog>> getStarBlogs(@RequestParam("username") String username) {
-        List<Blog> blogList = new ArrayList<Blog>();
-        long [] idArray = starService.getStars(username);
-        for(int i=0;i<idArray.length;i++){
-            blogList.add(blogService.getBlogById(idArray[i]));
+        List<Blog> blogList = new ArrayList<>();
+        long[] idArray = starService.getStars(username);
+        for (long l : idArray) {
+            blogList.add(blogService.getBlogById(l));
         }
-        return new ResponseEntity<>(blogList,HttpStatus.OK);
+        return new ResponseEntity<>(blogList, HttpStatus.OK);
     }
 
     //the number of users who have starred the blog

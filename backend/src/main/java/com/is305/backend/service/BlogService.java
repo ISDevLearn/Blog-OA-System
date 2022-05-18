@@ -55,7 +55,7 @@ public class BlogService {
      * @param title       title
      * @param description description
      * @param content     content
-     * @param id   id
+     * @param id          id
      */
     public void updateBlog(long id, String title, String description, String content) {
         Blog oldBlog = blogMapper.getBlogById(id);

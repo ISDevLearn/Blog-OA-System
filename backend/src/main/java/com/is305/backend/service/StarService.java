@@ -8,7 +8,6 @@ import com.is305.backend.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 
 @Service
 public class StarService {
@@ -20,10 +19,10 @@ public class StarService {
     @Resource
     private BlogMapper blogMapper;
 
-    public void setStar(long id, String username){
-        if(userMapper.getUserByUserName(username) != null && blogMapper.getBlogById(id) != null){
-            try{
-                starMapper.setStar(id,username);
+    public void setStar(long id, String username) {
+        if (userMapper.getUserByUserName(username) != null && blogMapper.getBlogById(id) != null) {
+            try {
+                starMapper.setStar(id, username);
             } catch (Exception exception) {
                 // If the relationship has existed in the table, it will throw a new exception.
                 try {
@@ -40,14 +39,18 @@ public class StarService {
     }
 
     public void cancelStar(long id, String username) {
-        starMapper.cancelStar(id,username);
+        starMapper.cancelStar(id, username);
     }
 
     public long[] getStars(String username) {
         return starMapper.getStars(username);
     }
 
-    public Integer getCountById(long id) {return starMapper.getCountById(id);}
+    public Integer getCountById(long id) {
+        return starMapper.getCountById(id);
+    }
 
-    public Integer getCountByUsername(String username) {return starMapper.getCountByUsername(username);}
+    public Integer getCountByUsername(String username) {
+        return starMapper.getCountByUsername(username);
+    }
 }
