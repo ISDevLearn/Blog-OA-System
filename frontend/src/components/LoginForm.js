@@ -109,7 +109,7 @@ const LoginForm = () => {
                 </Form.Item>
 
                 {/*TODO: 这里后面要加上跳转到忘记密码页面的路由*/}
-                <a className="login-form-forgot" href="">
+                <a className="login-form-forgot" onClick={history.push('/')}>
                     忘记密码
                 </a>
             </Form.Item>

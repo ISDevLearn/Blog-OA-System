@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 // import './index.less'
 import '../css/home.css'
 // import { decodeQuery, translateMarkdown2html } from '@/utils'
@@ -9,6 +9,7 @@ import '../css/home.css'
 import ArticleList from "../components/ArticleList";
 
 import { Empty, Spin } from 'antd'
+import BlogService from "../service/BlogService";
 // import WebPagination from '@/components/Pagination'
 
 // hooks
@@ -17,7 +18,7 @@ import { Empty, Spin } from 'antd'
 
 const HOME_PAGESIZE = 10
 
-const Home = props => {
+function Home(props) {
     // const { loading, pagination, dataList } = useFetchList({
     //     requestUrl: '/article/list',
     //     queryParams: { pageSize: HOME_PAGESIZE, type: true },
@@ -35,15 +36,31 @@ const Home = props => {
     // const { keyword } = decodeQuery(props.location.search)
 
     //TODO
-    const list = [{top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "2022-5-18"},
-        {top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "2022-5-18"},
-        {top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "2022-5-18"}]
+    // console.log(props)
+    const username = props.match.params.loginUsername
+    const [blogList, setBlogList] = useState([])
+
+    useEffect(() => {BlogService.getBlogByUsername(username).then(
+        res => {
+            console.log(res)
+            setBlogList(res.data)
+        })
+        .catch(
+            err => {
+        console.log(err);
+        })
+    }, [])
+
+
+    // const list = [{top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "2022-5-18"},
+    //     {top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "2022-5-18"},
+    //     {top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "2022-5-18"}]
 
     return (
         // <Spin tip='Loading...' spinning="1">
             <div className='app-home'>
                 {/* list  */}
-                <ArticleList list={list} />
+                <ArticleList list={blogList} username={username}/>
 
                 {/* quick link */}
                 {/*<QuickLink list={list} />*/}
