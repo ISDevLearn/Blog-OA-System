@@ -5,7 +5,8 @@ const API_URL = 'http://localhost:3000/user/';
 
 class UserService {
     getUserInfo(username) {
-        return axios.get(API_URL + username + '/', { headers: authHeader() });
+        console.log(authHeader())
+        return axios.get(API_URL + username + '/', { headers: authHeader(), withCredentials: true});
     }
 
     getModeratorBoard() {

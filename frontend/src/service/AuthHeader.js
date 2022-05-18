@@ -1,8 +1,9 @@
 export default function authHeader() {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const cookie = document.cookie;
+    const cookie = JSON.parse(localStorage.getItem('user'));
+    // const cookie = document.cookie;
+    // console.log(cookie)
 
-    if (user && cookie) {
+    if (cookie) {
         return { Cookie: cookie }; // for Spring Boot back-end
     } else {
         return {};
