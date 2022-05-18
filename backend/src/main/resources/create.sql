@@ -32,6 +32,14 @@ CREATE TABLE IF NOT EXISTS `m_blog`
     `created`     datetime      NOT NULL,
     `status`      tinyint(4)    DEFAULT NULL,
     PRIMARY KEY (`id`),
-    KEY `id` (`id`) USING BTREE
+    KEY `id` (`id`) USING BTREE,
+    KEY `username` (`username`) USING BTREE
 )ENGINE = InnoDB
  DEFAULT CHARSET = utf8mb3;
+
+CREATE TABLE IF NOT EXISTS `m_star`
+(
+    `id`          bigint(20) NOT NULL ,
+    `username`    varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+    PRIMARY KEY (`id`, `username`)
+);
