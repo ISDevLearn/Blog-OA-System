@@ -5,7 +5,6 @@ const API_URL = 'http://localhost:3000/user/';
 
 class UserService {
     getUserInfo(username) {
-        console.log(authHeader())
         return axios.get(API_URL + username + '/', { headers: authHeader(), withCredentials: true});
     }
 
