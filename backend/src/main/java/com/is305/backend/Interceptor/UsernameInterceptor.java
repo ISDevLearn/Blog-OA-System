@@ -33,7 +33,8 @@ public class UsernameInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Cookie cookie = CookieUtil.getUsernameInCookie(request.getCookies());
-        String username = request.getParameter("username");
+        String username = request.getParameter("follower");
+        username = username == null ? request.getParameter("username") : username;
         if (cookie != null && cookie.getValue().equals(username)) {
             // If the usernames match, return.
             return HandlerInterceptor.super.preHandle(request, response, handler);
