@@ -15,7 +15,7 @@ public class FollowerController {
     @Autowired
     FollowerService followerService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<String> setFollowing(@RequestParam("follower") String follower, @RequestParam("following") String following) {
         followerService.setFollowing(follower, following);
         return new ResponseEntity<>("Follow successfully!", HttpStatus.OK);

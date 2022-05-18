@@ -24,7 +24,7 @@ function HomeLayout(props) {
             <Header />
             <Row className='app-wrapper'>
                 <Col {...siderLayout}>
-                    <SideBar />
+                    <SideBar {...props}/>
                 </Col>
                 <Col {...contentLayout}>
                     <AppMain {...props} />

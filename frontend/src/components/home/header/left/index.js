@@ -9,7 +9,7 @@ import navList from '../right/NavList'
 // import SvgIcon from '@/components/SvgIcon'
 import { MenuOutlined, SearchOutlined } from '@ant-design/icons'
 
-export const HEADER_BLOG_NAME = 'Ayaka'
+export const HEADER_BLOG_NAME = 'Blog'
 
 const Index = props => {
     const [keyword, setKeyword] = useState('')

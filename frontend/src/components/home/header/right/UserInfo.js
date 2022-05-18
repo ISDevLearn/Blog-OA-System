@@ -41,7 +41,7 @@ function UserInfo(props) {
     return (
         <div className='header-userInfo'>
             {username ? (
-                    <Dropdown placement='bottomCenter' overlay={MenuOverLay} trigger={['click', 'hover']}>
+                    <Dropdown placement='bottom' overlay={MenuOverLay} trigger={['click', 'hover']}>
                         <div style={{ height: 55 }}>
                             {/*<AppAvatar userInfo={userInfo} popoverVisible={false} />*/}
                         </div>

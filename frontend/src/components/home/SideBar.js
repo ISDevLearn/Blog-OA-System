@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 // import Href from '@/components/Href'
 import { Divider, Tag } from 'antd'
+import UserService from "../../service/UserService";
 
 import { Alert } from 'antd'
 // import { ANNOUNCEMENT } from '@/config'
@@ -40,6 +41,7 @@ export const SIDEBAR = {
     }
 }
 
+
 function SideBar(props) {
     // const tagList = useSelector(state => state.article.tagList || [])
 
@@ -53,12 +55,25 @@ function SideBar(props) {
     //         type: true
     //     }
     // })
+    const username = props.match.params.loginUsername
+    const [email, setEmail] = useState()
+    const [avatar, serAvatar] = useState()
+    useEffect(() => {UserService.getUserInfo(username).then(
+        res => {
+            console.log(res)
+            setEmail(res.data.email)
+            serAvatar(res.data.avatar)
+        }
+    )}, [])
 
     return (
         <aside className='app-sidebar'>
-            <img src={SIDEBAR.avatar} className='sider-avatar' alt='' />
-            <h2 className='title'>{SIDEBAR.title}</h2>
-            <h5 className='sub-title'>{SIDEBAR.subTitle}</h5>
+            {/*TODO:当用户没有上传头像时，需要给一个默认头像*/}
+            {avatar ? <img src={`data:image/png;base64,${avatar}`} className='sider-avatar' alt=''/>:
+                <img src={SIDEBAR.avatar} className='sider-avatar' alt='' />}
+            <h2 className='title'>{username}</h2>
+            <h5 className='sub-title'>{email}</h5>
+            {/*TODO: 这里要写followers和following， 类似github*/}
             <ul className='home-pages'>
                 {Object.entries(SIDEBAR.homepages).map(([linkName, item]) => (
                     <li key={linkName}>
