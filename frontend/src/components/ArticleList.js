@@ -6,17 +6,14 @@ import { useHistory } from 'react-router-dom'
 import { Divider } from 'antd'
 // import SvgIcon from '@/components/SvgIcon'
 // import ArticleTag from '@/components/ArticleTag'
-import '../css/home.css'
+
 
 const ArticleList = props => {
+    console.log(props)
     const history = useHistory()
-    // const { list } = props
+    const { list } = props
 
-    //TODO
-    const list = [{top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "xxxxxxxxxxx"},
-        {top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "xxxxxxxxxxx"},
-        {top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "xxxxxxxxxxx"}]
-
+    // TODO
     function jumpTo(id) {
         history.push(`/article/${id}`)
     }

@@ -1,4 +1,5 @@
 import {Form, Input, Button, Checkbox, message} from 'antd';
+import React from 'react';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {history} from "../utils/history";
 import 'antd/dist/antd.css';
