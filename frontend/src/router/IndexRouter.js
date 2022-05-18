@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Router} from "react-router-dom";
 import {Route} from "react-router";
+import '../css/index.less'
 
 import ArticleList from "../components/ArticleList";
 import {history} from "../utils/history";

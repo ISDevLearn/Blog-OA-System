@@ -1,10 +1,12 @@
 import React from 'react'
 import '../../css/login.css';
+import '../../css/home.css'
 import { Alert } from 'antd'
 // import { ANNOUNCEMENT } from '@/config'
 // import { useMediaQuery } from 'react-responsive'
 import IndexRouter from '../../router/IndexRouter'
 import '../../css/home.css'
+import ArticleList from "../ArticleList";
 
 function AppMain(props) {
     // const iphoneScreen = useMediaQuery({
@@ -18,14 +20,50 @@ function AppMain(props) {
     return (
         <div className='app-main'>
             <div className='login-container'>
-                111
+                <div className='login-box'>
+                    <ArticleList />
+                </div>
             </div>
-            {/*{(ipadScreen || iphoneScreen) && ANNOUNCEMENT.enable && (*/}
-            {/*    <Alert message={ANNOUNCEMENT.content} type='info' style={{ marginTop: iphoneScreen ? 20 : 0, marginBottom: ipadScreen ? 20 : 0 }} />*/}
-            {/*)}*/}
-            {/*{props.children}*/}
-            <IndexRouter {...props}/>
+
+
+            <div className='login-container'>
+                <div className='login-box'>
+                    <IndexRouter {...props}/>
+                </div>
+            </div>
+
+            {/*<div className='.app-home'>*/}
+            {/*    <div className='.app-home-list-item'>*/}
+            {/*        <ArticleList />*/}
+            {/*    </div>*/}
+            {/*</div>*/}
+
         </div>
+        // <div>
+        //
+
+        //
+        // <div className='login-container'>
+        //     <div className='login-box'>
+        //         <ArticleList />
+        //     </div>
+        // </div>
+        //
+        // <div className='login-container'>
+        //     <div className='login-box'>
+        //         <ArticleList />
+        //     </div>
+        // </div>
+        //
+        // <div className='login-container'>
+        //     <div className='login-box'>
+        //             <ArticleList />
+        //         </div>
+        //     </div>
+        //
+        //     <IndexRouter {...props}/>
+        //
+        // </div>
     )
 }
 
