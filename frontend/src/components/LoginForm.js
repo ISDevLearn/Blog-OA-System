@@ -1,7 +1,7 @@
 import {Form, Input, Button, Checkbox, message} from 'antd';
+import React from 'react';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {history} from "../utils/history";
-import React from 'react'
 import 'antd/dist/antd.css';
 import '../css/login.css'
 import AuthService from "../service/AuthService";
@@ -18,7 +18,7 @@ const LoginForm = () => {
                 message.success("登录成功！", 1)
                 console.log('login success!')
                 // TODO: 跳转到用户首页,路径写在引号里面
-                history.push(`/home/${values.username}`)
+                history.push(`/${values.username}/home`)
                 // window.location.reload()
             },
             error => {
