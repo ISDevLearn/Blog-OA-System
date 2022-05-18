@@ -2,8 +2,6 @@ package com.is305.backend.mapper;
 
 import org.apache.ibatis.annotations.*;
 
-import java.util.ArrayList;
-
 @Mapper
 public interface StarMapper {
 
@@ -17,7 +15,7 @@ public interface StarMapper {
     long[] getStars(@Param("username") String username);
 
     @Select("SELECT COUNT(*) FROM m_star WHERE id = #{id};")
-    Integer getCountById(@Param("id")long id);
+    Integer getCountById(@Param("id") long id);
 
     @Select("SELECT COUNT(*) FROM m_star WHERE username=#{username};")
     Integer getCountByUsername(@Param("username") String username);

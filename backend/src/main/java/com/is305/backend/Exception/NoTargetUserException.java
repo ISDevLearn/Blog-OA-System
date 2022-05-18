@@ -1,4 +1,4 @@
 package com.is305.backend.Exception;
 
-public class NoTargetUserException extends RuntimeException{
+public class NoTargetUserException extends RuntimeException {
 }
