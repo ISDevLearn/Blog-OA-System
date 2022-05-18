@@ -17,7 +17,7 @@ class BasicRoute extends React.Component{
                 <Switch>
                     <Route exact path="/login" component={LoginView} />
                     <Route exact path="/register" component={RegView} />
-                    <Route exact path="/home/:loginUsername" component={HomeLayout} />
+                    <Route path="/:loginUsername" component={HomeLayout}/>
                     <Redirect from="/" to="/login" exact/>
                     <Route component={NotFound} />
                 </Switch>
