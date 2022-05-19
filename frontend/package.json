@@ -9,7 +9,10 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.20.1",
     "axios": "^0.27.2",
+    "base-64": "^1.0.0",
+    "highlight.js": "^11.5.1",
     "less": "^4.1.2",
+    "marked": "^4.0.16",
     "moment": "^2.29.3",
     "qs": "^6.10.3",
     "react": "^18.0.0",
@@ -17,7 +20,8 @@
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xss": "^1.0.11"
   },
   "scripts": {
     "start": "react-scripts start",
