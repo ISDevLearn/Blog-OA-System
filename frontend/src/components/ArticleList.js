@@ -16,7 +16,7 @@ function ArticleList(props) {
     // TODO
     function jumpTo(id) {
         console.log(props)
-        history.push(`/article/${id}`)
+        history.push(`article/${id}`)
     }
 
     return (

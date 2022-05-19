@@ -36,7 +36,7 @@ function Home(props) {
     // const { keyword } = decodeQuery(props.location.search)
 
     //TODO
-    // console.log(props)
+    console.log(props)
     const username = props.match.params.loginUsername
     const [blogList, setBlogList] = useState([])
 

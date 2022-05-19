@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {Router} from "react-router-dom";
-import {Route} from "react-router";
+import {Redirect, Route} from "react-router";
 import {history} from "../utils/history";
 
 import HomeContent from "../view/HomeContent";
+import ArticleContent from "../view/ArticleContent";
 
 
 class IndexRouter extends React.Component {
@@ -13,7 +14,9 @@ class IndexRouter extends React.Component {
             <div>
                 <Router history={history}>
                     <switch>
-                        <Route path={"/:loginUsername/home"} component={HomeContent} exact/>
+                        <Route path="/:loginUsername/home" component={HomeContent} exact/>
+                        <Route path="/:loginUsername/article/:article_id" component={ArticleContent} exact/>
+                        {/*<Redirect to={"/"+ username +"/home"}/>*/}
                     </switch>
                 </Router>
             </div>
