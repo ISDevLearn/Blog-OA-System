@@ -3,7 +3,6 @@ import { Alert } from 'antd'
 // import { ANNOUNCEMENT } from '@/config'
 // import { useMediaQuery } from 'react-responsive'
 import IndexRouter from '../../router/IndexRouter'
-import '../../css/home.css'
 
 function AppMain(props) {
     // const iphoneScreen = useMediaQuery({

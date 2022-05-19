@@ -1,4 +1,5 @@
 import {Form, Input, Button, Checkbox, message} from 'antd';
+import React from 'react';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {history} from "../utils/history";
 import 'antd/dist/antd.css';
@@ -16,9 +17,8 @@ const LoginForm = () => {
             () => {
                 message.success("登录成功！", 1)
                 console.log('login success!')
-                // TODO: 跳转到用户首页,路径写在引号里面
-                history.push(`/home/${values.username}`)
-                // window.location.reload()
+                history.push(`/${values.username}/home`)
+                window.location.reload()
             },
             error => {
                 const resMessage = (error.response && error.response.data && error.response.data.message)
@@ -109,7 +109,8 @@ const LoginForm = () => {
                 </Form.Item>
 
                 {/*TODO: 这里后面要加上跳转到忘记密码页面的路由*/}
-                <a className="login-form-forgot" href="">
+                {/*<a className="login-form-forgot" onClick={history.push('/')}>*/}
+                <a>
                     忘记密码
                 </a>
             </Form.Item>

@@ -4,42 +4,40 @@ import { useHistory } from 'react-router-dom'
 
 // components
 import { Divider } from 'antd'
+import moment from "moment";
 // import SvgIcon from '@/components/SvgIcon'
 // import ArticleTag from '@/components/ArticleTag'
-import '../css/home.css'
 
-const ArticleList = props => {
+
+function ArticleList(props) {
     const history = useHistory()
-    // const { list } = props
+    const { list } = props
 
-    //TODO
-    const list = [{top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "xxxxxxxxxxx"},
-        {top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "xxxxxxxxxxx"},
-        {top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "xxxxxxxxxxx"}]
-
+    // TODO
     function jumpTo(id) {
-        history.push(`/article/${id}`)
+        console.log(props)
+        history.push(`article/${id}`)
     }
 
     return (
         <ul className='app-home-list'>
             {list.map(item => (
                 <div>
-                    {item.top ? (
-                        <div className='button-content-right'>置顶</div>
-                    ) : (<div />)}
+                    {/*{item.top ? (*/}
+                    {/*    <div className='button-content-right'>置顶</div>*/}
+                    {/*) : (<div />)}*/}
                     <li key={item.id} className='app-home-list-item'>
                         <Divider orientation='left'>
               <span className='title' onClick={() => jumpTo(item.id)}>
                 {item.title}
               </span>
-                            <span className='posted-time'>{item.createdAt.slice(0, 10)}</span>
+                            <span className='posted-time'>{moment(parseInt(item.created)).format("YYYY-MM-DD HH:mm:ss")}</span>
                         </Divider>
 
                         <div
                             onClick={() => jumpTo(item.id)}
                             className='article-detail content'
-                            dangerouslySetInnerHTML = {{__html: item.content}}>
+                            dangerouslySetInnerHTML = {{__html: item.description}}>
                         </div>
 
                         <div className='list-item-others'>

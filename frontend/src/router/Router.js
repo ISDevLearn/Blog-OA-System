@@ -7,7 +7,7 @@ import RegView from '../view/RegView'
 import LoginView from '../view/LoginView'
 import NotFound from "../view/PageNotFound";
 import {history} from "../utils/history";
-import HomeLayout from "../view/Home";
+import HomeLayout from "../view/HomeLayout";
 
 
 class BasicRoute extends React.Component{
