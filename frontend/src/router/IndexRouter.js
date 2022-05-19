@@ -15,7 +15,7 @@ class IndexRouter extends React.Component {
                 <Router history={history}>
                     <switch>
                         <Route path="/:loginUsername/home" component={HomeContent} exact/>
-                        <Route path="/:loginUsername/article/:article_id" component={ArticleContent} exact/>
+                        <Route path="/:loginUsername/article/:articleId" component={ArticleContent} exact/>
                         {/*<Redirect to={"/"+ username +"/home"}/>*/}
                     </switch>
                 </Router>

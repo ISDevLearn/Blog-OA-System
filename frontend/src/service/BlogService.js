@@ -13,6 +13,16 @@ class BlogService {
             }
         })
     }
+
+    getBlogById(id) {
+        return axios.
+        get(API_URL + '/id/' + id,{
+            headers: authHeader(),
+            params: {
+                'id': id
+            }
+        })
+    }
 }
 
 export default new BlogService();

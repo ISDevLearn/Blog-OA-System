@@ -15,19 +15,35 @@ import { Drawer, Divider, Spin } from 'antd'
 // import Navigation from './Navigation'
 // import Discuss from '@/components/Discuss'
 import { MenuOutlined } from '@ant-design/icons'
+import BlogService from "../service/BlogService";
+import moment from "moment";
+
 function Article(props) {
     // const [loading, withLoading] = useAjaxLoading()
+    console.log(props)
+    const articleid = props.match.params.articleId
 
     const [article, setArticle] = useState({
+        id: '',
+        username: '',
         title: '',
+        description: '',
         content: '',
-        tags: [],
-        categories: [],
-        comments: [],
-        createdAt: '',
-        viewCount: 0
+        created: '',
+        status: 1
     })
     const [drawerVisible, setDrawerVisible] = useState(false)
+
+    useEffect(() => {BlogService.getBlogById(articleid).then(
+        res => {
+            console.log(res)
+            setArticle(res.data)
+        })
+        .catch(
+            err => {
+                console.log(err);
+            })
+    }, [])
 
     // useEffect(() => {
     //     setTimeout(() => {
@@ -59,9 +75,9 @@ function Article(props) {
     // }, [props.match.params.id])
 
     //TODO get blog from backend
-    const title = 'test'
-    const content = 'testaaaaaaaaaaaaaaaaaaaaa'
-    const createdAt = '2022-5-19'
+    // const title = 'test'
+    // const content = 'testaaaaaaaaaaaaaaaaaaaaa'
+    // const createdAt = '2022-5-19'
     const viewCount = 10
 
     const isFoldNavigation = 0
@@ -70,7 +86,7 @@ function Article(props) {
     //     setArticle({ ...article, comments: list })
     // }
 
-    // const { title, content, tags, categories, comments, createdAt, viewCount } = article
+    const { id, username, title, description, content, created, status } = article
 
     // const articleId = parseInt(props.match.params.article_id)
     // console.log(articleId)
@@ -85,7 +101,7 @@ function Article(props) {
                         <span className='post-time'>
                             {/*<SvgIcon type='iconpost' />*/}
                             &nbsp; Posted on &nbsp;
-                            <span>{createdAt}</span>
+                            <span>{moment(parseInt(created)).format("YYYY-MM-DD")}</span>
                         </span>
                         {/*<ArticleTag tagList={tags} categoryList={categories} />*/}
                         <Divider type='vertical' />
