@@ -3,6 +3,7 @@ package com.is305.backend.controller;
 import com.is305.backend.entity.AccessToken;
 import com.is305.backend.entity.User;
 import com.is305.backend.exception.UsernameOrPasswordErrorException;
+import com.is305.backend.interceptor.PassToken;
 import com.is305.backend.service.UserService;
 import com.is305.backend.util.LoginUtil;
 import com.is305.backend.util.UserUtil;
@@ -23,6 +24,7 @@ public class LoginController {
     @Autowired
     UserService userService;
 
+    @PassToken
     @PostMapping("/login/")
     public AccessToken login(HttpServletResponse response, @RequestParam("username") String username, @RequestParam("password") String password) {
         User user = userService.getUserByUsername(username);
@@ -42,6 +44,7 @@ public class LoginController {
         }
     }
 
+    @PassToken
     @GetMapping("/logout")
     public AccessToken logout(HttpServletResponse response) {
         return new AccessToken();

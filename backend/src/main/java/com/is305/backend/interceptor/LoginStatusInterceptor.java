@@ -9,10 +9,12 @@ import com.is305.backend.service.UserService;
 import com.is305.backend.util.LoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -36,8 +38,12 @@ public class LoginStatusInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getMethod().equals("POST") && request.getRequestURI().equals("/user/")) {
-            return true;
+        Method method = ((HandlerMethod) handler).getMethod();
+        if (method.isAnnotationPresent(PassToken.class)) {
+            PassToken passToken = method.getAnnotation(PassToken.class);
+            if (passToken.require()) {
+                return true;
+            }
         }
         byte[] token = LoginUtil.stringToBytes(request.getHeader("Token"));
         String username = request.getHeader("Username");
