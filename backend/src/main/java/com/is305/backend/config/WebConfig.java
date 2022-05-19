@@ -1,7 +1,7 @@
 package com.is305.backend.config;
 
-import com.is305.backend.Interceptor.LoginStatusInterceptor;
-import com.is305.backend.Interceptor.UsernameInterceptor;
+import com.is305.backend.interceptor.LoginStatusInterceptor;
+import com.is305.backend.interceptor.UsernameInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

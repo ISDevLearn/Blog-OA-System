@@ -1,4 +1,4 @@
-package com.is305.backend.Util;
+package com.is305.backend.util;
 
 import javax.servlet.http.Cookie;
 

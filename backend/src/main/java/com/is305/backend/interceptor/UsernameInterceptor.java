@@ -1,7 +1,7 @@
-package com.is305.backend.Interceptor;
+package com.is305.backend.interceptor;
 
-import com.is305.backend.Exception.IllegalQueryException;
-import com.is305.backend.Util.CookieUtil;
+import com.is305.backend.exception.IllegalQueryException;
+import com.is305.backend.util.CookieUtil;
 import com.is305.backend.service.FollowerService;
 import com.is305.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

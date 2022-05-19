@@ -1,7 +1,7 @@
 package com.is305.backend.controller;
 
-import com.is305.backend.Exception.IllegalQueryException;
-import com.is305.backend.Util.CookieUtil;
+import com.is305.backend.exception.IllegalQueryException;
+import com.is305.backend.util.CookieUtil;
 import com.is305.backend.entity.Blog;
 import com.is305.backend.service.BlogService;
 import jakarta.validation.constraints.NotNull;

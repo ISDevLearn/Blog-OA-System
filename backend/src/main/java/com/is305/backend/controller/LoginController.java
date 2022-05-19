@@ -1,8 +1,8 @@
 package com.is305.backend.controller;
 
-import com.is305.backend.Exception.UsernameOrPasswordErrorException;
-import com.is305.backend.Util.LoginUtil;
-import com.is305.backend.Util.UserUtil;
+import com.is305.backend.exception.UsernameOrPasswordErrorException;
+import com.is305.backend.util.LoginUtil;
+import com.is305.backend.util.UserUtil;
 import com.is305.backend.entity.User;
 import com.is305.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

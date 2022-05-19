@@ -1,7 +1,7 @@
-package com.is305.backend.Util;
+package com.is305.backend.util;
 
 
-import com.is305.backend.Exception.IllegalHexException;
+import com.is305.backend.exception.IllegalHexException;
 
 import java.io.ByteArrayOutputStream;
 import java.security.NoSuchAlgorithmException;

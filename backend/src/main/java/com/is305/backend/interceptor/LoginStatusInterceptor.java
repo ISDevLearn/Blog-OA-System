@@ -1,11 +1,11 @@
-package com.is305.backend.Interceptor;
+package com.is305.backend.interceptor;
 
-import com.is305.backend.Exception.ExpirationException;
-import com.is305.backend.Exception.IllegalLoginException;
-import com.is305.backend.Exception.NoLoginException;
-import com.is305.backend.Exception.NoTargetUserException;
-import com.is305.backend.Util.CookieUtil;
-import com.is305.backend.Util.LoginUtil;
+import com.is305.backend.exception.ExpirationException;
+import com.is305.backend.exception.IllegalLoginException;
+import com.is305.backend.exception.NoLoginException;
+import com.is305.backend.exception.NoTargetUserException;
+import com.is305.backend.util.CookieUtil;
+import com.is305.backend.util.LoginUtil;
 import com.is305.backend.entity.User;
 import com.is305.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

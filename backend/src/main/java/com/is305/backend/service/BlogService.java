@@ -1,6 +1,6 @@
 package com.is305.backend.service;
 
-import com.is305.backend.Exception.BlogCreatedException;
+import com.is305.backend.exception.BlogCreatedException;
 import com.is305.backend.entity.Blog;
 import com.is305.backend.mapper.BlogMapper;
 import org.springframework.stereotype.Service;
