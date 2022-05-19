@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-// import './index.less'
+// import './article.less'
 import '../css/article.css'
+import '../css/markdown.css'
 
 // import { useMediaQuery } from 'react-responsive'
 // methods
 // import axios from '@/utils/axios'
-// import { translateMarkdown, translateMarkdown2html, calcCommentsCount } from '@/utils'
 // import useAjaxLoading from '@/hooks/useAjaxLoading'
 
 // components
@@ -16,6 +16,7 @@ import { Drawer, Divider, Spin } from 'antd'
 // import Discuss from '@/components/Discuss'
 import { MenuOutlined } from '@ant-design/icons'
 import BlogService from "../service/BlogService";
+import {translateMarkdown2html} from "../utils/markdown";
 import moment from "moment";
 
 function Article(props) {
@@ -36,7 +37,7 @@ function Article(props) {
 
     useEffect(() => {BlogService.getBlogById(articleid).then(
         res => {
-            console.log(res)
+            res.data.content = translateMarkdown2html(res.data.content)
             setArticle(res.data)
         })
         .catch(
@@ -75,9 +76,6 @@ function Article(props) {
     // }, [props.match.params.id])
 
     //TODO get blog from backend
-    // const title = 'test'
-    // const content = 'testaaaaaaaaaaaaaaaaaaaaa'
-    // const createdAt = '2022-5-19'
     const viewCount = 10
 
     const isFoldNavigation = 0
