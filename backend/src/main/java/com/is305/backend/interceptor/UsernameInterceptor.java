@@ -1,14 +1,12 @@
 package com.is305.backend.interceptor;
 
 import com.is305.backend.exception.IllegalQueryException;
-import com.is305.backend.util.CookieUtil;
 import com.is305.backend.service.FollowerService;
 import com.is305.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,10 +30,9 @@ public class UsernameInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Cookie cookie = CookieUtil.getUsernameInCookie(request.getCookies());
         String username = request.getParameter("follower");
         username = username == null ? request.getParameter("username") : username;
-        if (cookie != null && cookie.getValue().equals(username)) {
+        if (username.equals(request.getHeader("Username"))) {
             // If the usernames match, return.
             return HandlerInterceptor.super.preHandle(request, response, handler);
         }

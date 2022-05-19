@@ -19,6 +19,9 @@ public class LoginUtil {
     }
 
     static public byte[] stringToBytes(String hex) throws IllegalHexException {
+        if (hex == null) {
+            return null;
+        }
         byte b = 0;
         boolean flag = false;
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -44,6 +47,9 @@ public class LoginUtil {
     }
 
     static public String bytesToString(byte[] bytes) {
+        if (bytes == null) {
+            return null;
+        }
         StringBuilder builder = new StringBuilder();
         for (byte b : bytes) {
             byte[] bs = {(byte) (((int) b & 0xff) / 0x10), (byte) (((int) b & 0xff) % 0x10)};

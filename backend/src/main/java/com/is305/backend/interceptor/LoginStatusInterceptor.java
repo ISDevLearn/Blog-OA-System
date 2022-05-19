@@ -1,18 +1,16 @@
 package com.is305.backend.interceptor;
 
+import com.is305.backend.entity.User;
 import com.is305.backend.exception.ExpirationException;
 import com.is305.backend.exception.IllegalLoginException;
 import com.is305.backend.exception.NoLoginException;
 import com.is305.backend.exception.NoTargetUserException;
-import com.is305.backend.util.CookieUtil;
-import com.is305.backend.util.LoginUtil;
-import com.is305.backend.entity.User;
 import com.is305.backend.service.UserService;
+import com.is305.backend.util.LoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
@@ -41,14 +39,8 @@ public class LoginStatusInterceptor implements HandlerInterceptor {
         if (request.getMethod().equals("POST") && request.getRequestURI().equals("/user/")) {
             return true;
         }
-        Cookie[] cookies = request.getCookies();
-        if (cookies == null) {
-            throw new NoLoginException();
-        }
-        Cookie cookie = CookieUtil.getTokenInCookie(cookies);
-        byte[] token = cookie != null ? LoginUtil.stringToBytes(cookie.getValue()) : null;
-        cookie = CookieUtil.getUsernameInCookie(cookies);
-        String username = cookie != null ? cookie.getValue() : null;
+        byte[] token = LoginUtil.stringToBytes(request.getHeader("Token"));
+        String username = request.getHeader("Username");
         if (token == null || username == null) {
             // If there are no tokens or usernames, the user hasn't logged in yet.
             throw new NoLoginException();

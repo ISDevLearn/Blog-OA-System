@@ -1,7 +1,6 @@
 package com.is305.backend.controller;
 
 import com.is305.backend.exception.IllegalQueryException;
-import com.is305.backend.util.CookieUtil;
 import com.is305.backend.entity.Blog;
 import com.is305.backend.service.BlogService;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -23,10 +21,7 @@ public class BlogController {
 
     @PostMapping("/")
     public ResponseEntity<String> createBlog(HttpServletRequest request, @NotNull @RequestParam("username") String username, @NotNull @RequestParam("title") String title, @NotNull @RequestParam("description") String description, @NotNull @RequestParam("content") String content) {
-        Cookie cookie = CookieUtil.getUsernameInCookie(request.getCookies());
-        if (cookie == null) {
-            throw new IllegalQueryException();
-        } else if (!username.equals(cookie.getValue())) {
+        if (!username.equals(request.getHeader("Username"))) {
             throw new IllegalQueryException();
         }
         blogService.createBlog(username, title, description, content);
@@ -62,12 +57,8 @@ public class BlogController {
     }
 
     private void checkLegalId(HttpServletRequest request, long id) {
-        Cookie cookie = CookieUtil.getUsernameInCookie(request.getCookies());
-        if (cookie == null) {
-            throw new IllegalQueryException();
-        }
         String username = blogService.getBlogById(id).getUsername();
-        if (username == null || !username.equals(cookie.getValue())) {
+        if (username == null || !username.equals(request.getHeader("Username"))) {
             throw new IllegalQueryException();
         }
     }
