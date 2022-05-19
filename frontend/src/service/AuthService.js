@@ -10,9 +10,8 @@ class AuthService {
                 Qs.stringify({'username': username, 'password': password})
             )
             .then(response => {
-                console.log(response)
-                if (document.cookie) {
-                    localStorage.setItem('user', JSON.stringify(document.cookie));
+                if (response.data) {
+                    localStorage.setItem('user', JSON.stringify(response.data));
                 }
 
                 return response.data;
