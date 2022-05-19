@@ -4,17 +4,18 @@ import { useHistory } from 'react-router-dom'
 
 // components
 import { Divider } from 'antd'
+import moment from "moment";
 // import SvgIcon from '@/components/SvgIcon'
 // import ArticleTag from '@/components/ArticleTag'
 
 
-const ArticleList = props => {
-    console.log(props)
+function ArticleList(props) {
     const history = useHistory()
     const { list } = props
 
     // TODO
     function jumpTo(id) {
+        console.log(props)
         history.push(`/article/${id}`)
     }
 
@@ -22,21 +23,21 @@ const ArticleList = props => {
         <ul className='app-home-list'>
             {list.map(item => (
                 <div>
-                    {item.top ? (
-                        <div className='button-content-right'>置顶</div>
-                    ) : (<div />)}
+                    {/*{item.top ? (*/}
+                    {/*    <div className='button-content-right'>置顶</div>*/}
+                    {/*) : (<div />)}*/}
                     <li key={item.id} className='app-home-list-item'>
                         <Divider orientation='left'>
               <span className='title' onClick={() => jumpTo(item.id)}>
                 {item.title}
               </span>
-                            <span className='posted-time'>{item.createdAt.slice(0, 10)}</span>
+                            <span className='posted-time'>{moment(parseInt(item.created)).format("YYYY-MM-DD HH:mm:ss")}</span>
                         </Divider>
 
                         <div
                             onClick={() => jumpTo(item.id)}
                             className='article-detail content'
-                            dangerouslySetInnerHTML = {{__html: item.content}}>
+                            dangerouslySetInnerHTML = {{__html: item.description}}>
                         </div>
 
                         <div className='list-item-others'>

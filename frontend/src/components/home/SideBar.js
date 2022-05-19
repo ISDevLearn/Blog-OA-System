@@ -18,7 +18,7 @@ import { Alert } from 'antd'
 // import useFetchList from '@/hooks/useFetchList'
 
 export const SIDEBAR = {
-    avatar: require('../../assets/images/avatar.jpg'), // 侧边栏头像
+    avatar: require('../../assets/images/paimon.jpg'), // 侧边栏头像
     // 关注的信息
     follows: {
         follower: {

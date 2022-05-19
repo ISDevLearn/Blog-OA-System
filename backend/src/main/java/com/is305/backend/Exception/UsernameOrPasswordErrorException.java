@@ -1,4 +1,4 @@
 package com.is305.backend.Exception;
 
-public class UsernameOrPasswordErrorException extends RuntimeException{
+public class UsernameOrPasswordErrorException extends RuntimeException {
 }

@@ -24,10 +24,7 @@ public class LoginController {
     UserService userService;
 
     @PostMapping("/login/")
-    public String login(HttpServletResponse response,
-                        @RequestParam("username") String username,
-                        @RequestParam("password") String password)
-    {
+    public String login(HttpServletResponse response, @RequestParam("username") String username, @RequestParam("password") String password) {
         User user = userService.getUserByUsername(username);
         if (user == null) {
             throw new UsernameOrPasswordErrorException();

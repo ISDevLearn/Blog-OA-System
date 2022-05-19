@@ -19,15 +19,15 @@ public class BlogService {
      * <p>Create a blog based on the assigned values.</p>
      * <p>The left values are assigned by default.</p>
      *
-     * @param username username
-     * @param title  title
-     * @param description    description
-     * @param content content
+     * @param username    username
+     * @param title       title
+     * @param description description
+     * @param content     content
      */
-    public void createBlog(String username, String title, String description, String content){
-        try{
-            blogMapper.creatBlog(username,title,description,content,new Date(),true);
-        }catch (Exception exception){
+    public void createBlog(String username, String title, String description, String content) {
+        try {
+            blogMapper.creatBlog(username, title, description, content, new Date(), true);
+        } catch (Exception exception) {
             try {
                 throw exception.getCause();
             } catch (Throwable throwable) {
@@ -36,30 +36,34 @@ public class BlogService {
         }
     }
 
-    public void deleteBlog(Blog blog){blogMapper.deleteBlogById(blog.getId());}
+    public void deleteBlog(Blog blog) {
+        blogMapper.deleteBlogById(blog.getId());
+    }
 
-    public void deleteBlogById(int id){blogMapper.deleteBlogById(id);}
+    public void deleteBlogById(long id) {
+        blogMapper.deleteBlogById(id);
+    }
 
-    public Blog getBlogById(int id){return blogMapper.getBlogById(id);}
+    public Blog getBlogById(long id) {
+        return blogMapper.getBlogById(id);
+    }
 
     /**
      * <p>Update a blog based on the assigned values.</p>
      * <p>The left values are assigned by default.</p>
      *
-     * @parm  id   id
-     * @param title  title
-     * @param description    description
-     * @param content content
+     * @param title       title
+     * @param description description
+     * @param content     content
+     * @param id          id
      */
-    public void updateBlog(int id,String title, String description, String content){
+    public void updateBlog(long id, String title, String description, String content) {
         Blog oldBlog = blogMapper.getBlogById(id);
-        blogMapper.updateBlogById(id,
-                title == null ? oldBlog.getTitle() : title,
-                description == null ? oldBlog.getDescription() : description,
-                content == null ? oldBlog.getContent() : content,
-                true);
+        blogMapper.updateBlogById(id, title == null ? oldBlog.getTitle() : title, description == null ? oldBlog.getDescription() : description, content == null ? oldBlog.getContent() : content, true);
     }
 
-    public List<Blog> getBlogByUsername(String username){return blogMapper.getBlogByUsername(username);}
+    public List<Blog> getBlogByUsername(String username) {
+        return blogMapper.getBlogByUsername(username);
+    }
 
 }

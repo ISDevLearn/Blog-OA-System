@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.sql.SQLIntegrityConstraintViolationException;
-
 @ControllerAdvice
 public class ExceptionHandlingController {
 
@@ -38,9 +36,19 @@ public class ExceptionHandlingController {
         return new ResponseEntity<>("The target user doesn't exist.", HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler({NoTargetUserOrBlogException.class})
+    public ResponseEntity<String> noTargetUserOrBlogError() {
+        return new ResponseEntity<>("The target user or blog doesn't exist.", HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler({FollowedException.class})
     public ResponseEntity<String> followedBeforeError() {
         return new ResponseEntity<>("The user has followed following before.", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({StarException.class})
+    public ResponseEntity<String> starBeforeError() {
+        return new ResponseEntity<>("The user has starred the blog before.", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler({IllegalQueryException.class})

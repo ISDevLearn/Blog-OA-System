@@ -7,14 +7,13 @@ import HomeContent from "../view/HomeContent";
 
 
 class IndexRouter extends React.Component {
-
     render() {
-        const username = this.props.match.params.loginUsername
+        // const username = this.props.match.params.loginUsername
         return (
             <div>
                 <Router history={history}>
                     <switch>
-                        <Route path={"/"+username+"/home"} component={HomeContent} exact/>
+                        <Route path={"/:loginUsername/home"} component={HomeContent} exact/>
                     </switch>
                 </Router>
             </div>
