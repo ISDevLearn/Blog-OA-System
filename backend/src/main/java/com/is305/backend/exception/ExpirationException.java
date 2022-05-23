@@ -1,4 +1,4 @@
-package com.is305.backend.Exception;
+package com.is305.backend.exception;
 
 public class ExpirationException extends RuntimeException {
 }

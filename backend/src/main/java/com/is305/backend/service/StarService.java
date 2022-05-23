@@ -1,7 +1,7 @@
 package com.is305.backend.service;
 
-import com.is305.backend.Exception.NoTargetUserOrBlogException;
-import com.is305.backend.Exception.StarException;
+import com.is305.backend.exception.NoTargetUserOrBlogException;
+import com.is305.backend.exception.StarException;
 import com.is305.backend.mapper.BlogMapper;
 import com.is305.backend.mapper.StarMapper;
 import com.is305.backend.mapper.UserMapper;

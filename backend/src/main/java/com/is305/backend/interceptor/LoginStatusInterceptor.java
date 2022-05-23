@@ -1,20 +1,20 @@
-package com.is305.backend.Interceptor;
+package com.is305.backend.interceptor;
 
-import com.is305.backend.Exception.ExpirationException;
-import com.is305.backend.Exception.IllegalLoginException;
-import com.is305.backend.Exception.NoLoginException;
-import com.is305.backend.Exception.NoTargetUserException;
-import com.is305.backend.Util.CookieUtil;
-import com.is305.backend.Util.LoginUtil;
 import com.is305.backend.entity.User;
+import com.is305.backend.exception.ExpirationException;
+import com.is305.backend.exception.IllegalLoginException;
+import com.is305.backend.exception.NoLoginException;
+import com.is305.backend.exception.NoTargetUserException;
 import com.is305.backend.service.UserService;
+import com.is305.backend.util.LoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -38,17 +38,15 @@ public class LoginStatusInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getMethod().equals("POST") && request.getRequestURI().equals("/user/")) {
-            return true;
+        Method method = ((HandlerMethod) handler).getMethod();
+        if (method.isAnnotationPresent(PassToken.class)) {
+            PassToken passToken = method.getAnnotation(PassToken.class);
+            if (passToken.require()) {
+                return true;
+            }
         }
-        Cookie[] cookies = request.getCookies();
-        if (cookies == null) {
-            throw new NoLoginException();
-        }
-        Cookie cookie = CookieUtil.getTokenInCookie(cookies);
-        byte[] token = cookie != null ? LoginUtil.stringToBytes(cookie.getValue()) : null;
-        cookie = CookieUtil.getUsernameInCookie(cookies);
-        String username = cookie != null ? cookie.getValue() : null;
+        byte[] token = LoginUtil.stringToBytes(request.getHeader("Token"));
+        String username = request.getHeader("Username");
         if (token == null || username == null) {
             // If there are no tokens or usernames, the user hasn't logged in yet.
             throw new NoLoginException();

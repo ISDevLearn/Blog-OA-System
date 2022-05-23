@@ -1,7 +1,7 @@
 package com.is305.backend.service;
 
-import com.is305.backend.Exception.FollowedException;
-import com.is305.backend.Exception.NoTargetUserException;
+import com.is305.backend.exception.FollowedException;
+import com.is305.backend.exception.NoTargetUserException;
 import com.is305.backend.mapper.FollowerMapper;
 import com.is305.backend.mapper.UserMapper;
 import org.springframework.stereotype.Service;

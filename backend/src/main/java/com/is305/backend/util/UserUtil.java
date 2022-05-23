@@ -1,4 +1,4 @@
-package com.is305.backend.Util;
+package com.is305.backend.util;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
