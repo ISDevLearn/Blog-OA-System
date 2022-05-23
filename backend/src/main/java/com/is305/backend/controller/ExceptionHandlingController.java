@@ -61,4 +61,8 @@ public class ExceptionHandlingController {
         return new ResponseEntity<>("The file size is too large.", HttpStatus.FORBIDDEN);
     }
 
+    @ExceptionHandler({AddressException.class, MessagingException.class})
+    public ResponseEntity<String> illegalAddress() {
+        return new ResponseEntity<>("Illegal Address.", HttpStatus.NOT_FOUND);
+    }
 }

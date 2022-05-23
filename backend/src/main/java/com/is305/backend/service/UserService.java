@@ -24,10 +24,11 @@ public class UserService {
      * @param avatar   avatar
      * @param email    email
      * @param password password
+     * @param code     check code
      */
-    public void createUser(String username, byte[] avatar, String email, String password) {
+    public void createUser(String username, byte[] avatar, String email, String password, String code) {
         try {
-            userMapper.createUser(username, avatar, email, UserUtil.hashPassword(password), false, new Date(), new Date(), LoginUtil.getRandomToken());
+            userMapper.createUser(username, avatar, email, UserUtil.hashPassword(password), false, new Date(), new Date(), LoginUtil.getRandomToken(), code);
         } catch (Exception exception) {
             try {
                 throw exception.getCause();
@@ -62,6 +63,10 @@ public class UserService {
 
     public void updateUserLastLoginAndToken(Date lastLogin, byte[] token, String username) {
         userMapper.updateUserLastLoginAndToken(lastLogin, token, username);
+    }
+
+    public void updateUserStatus(String username,Boolean status){
+        userMapper.updateUserStatusByUserName(username,status);
     }
 
 }
