@@ -1,8 +1,8 @@
 package com.is305.backend.service;
 
-import com.is305.backend.Exception.UserCreatedException;
-import com.is305.backend.Util.LoginUtil;
-import com.is305.backend.Util.UserUtil;
+import com.is305.backend.exception.UserCreatedException;
+import com.is305.backend.util.LoginUtil;
+import com.is305.backend.util.UserUtil;
 import com.is305.backend.entity.User;
 import com.is305.backend.mapper.UserMapper;
 import org.springframework.stereotype.Service;

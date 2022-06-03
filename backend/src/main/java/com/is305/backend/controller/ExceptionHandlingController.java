@@ -1,6 +1,6 @@
 package com.is305.backend.controller;
 
-import com.is305.backend.Exception.*;
+import com.is305.backend.exception.*;
 import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
 import org.springframework.http.HttpStatus;
