@@ -92,8 +92,8 @@ function SideBar(props) {
             <ul className='home-pages'>
                 <Card style={{ width: 300 }}>
                     {/* TODO: 点击followers跳转到关注者界面，点击followings跳转到被关注者界面，*/}
-                    <li onClick={() => {history.push(`followers/`)}}><TeamOutlined style={{ marginRight: 15 }} />{followersNum} followers</li>
-                    <li onClick={() => {history.push('')}}><TeamOutlined style={{ marginRight: 15 }} />{followingsNum} following</li>
+                    <li onClick={() => {history.push(`/${username}/followers/`)}}><TeamOutlined style={{ marginRight: 15 }} />{followersNum} followers</li>
+                    <li onClick={() => {history.push(`/${username}/followings/`)}}><TeamOutlined style={{ marginRight: 15 }} />{followingsNum} following</li>
                 </Card>
             </ul>
 

@@ -104,6 +104,11 @@
     height: 132px;
     border-radius: 50%;
 }
+.follow-avatar {
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+}
 .app-container .app-sidebar .title {
     font-size: 1.5em;
     font-weight: 700;

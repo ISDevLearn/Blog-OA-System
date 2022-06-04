@@ -7,8 +7,8 @@ import UserService from "../service/UserService";
 // import ArticleTag from '@/components/ArticleTag'
 
 
-function FollowersList(props) {
-    const { followerList } = props
+function FollowingsList(props) {
+    const { followingList } = props
     const [avatar, setAvatar] = useState([])
     const username = ['kazuha']
 
@@ -21,8 +21,8 @@ function FollowersList(props) {
 
     return (
         <ul className='app-home-list'>
-            <h1>Followers</h1>
-            {followerList.map((name, index) => (
+            <h1>Followings</h1>
+            {followingList.map((name, index) => (
                 <div>
                     <li key={index} className='app-home-list-item'>
                         <Divider orientation='left'>
@@ -42,4 +42,4 @@ function FollowersList(props) {
     )
 }
 
-export default FollowersList
+export default FollowingsList
