@@ -1,5 +1,4 @@
 import React from 'react'
-// import { EditOutline, FolderOutline, HomeOutline, MessageOutline, UserOutline } from 'utils/antdIcon'
 import {EditOutlined, FolderOutlined,HomeOutlined, MessageOutlined, UserOutlined} from "@ant-design/icons";
 
 export default [

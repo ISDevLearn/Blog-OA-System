@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-// import { calcCommentsCount } from '@/utils'
 
-// components
 import { Divider} from 'antd'
 import moment from "moment";
 import {StarOutlined} from "@ant-design/icons";
-// import SvgIcon from '@/components/SvgIcon'
-// import ArticleTag from '@/components/ArticleTag'
 
 
 function ArticleList(props) {
     const history = useHistory()
     const { list } = props
 
-    console.log(list)
-
     // TODO
     function jumpTo(id) {
-        console.log(props)
         history.push(`article/${id}`)
     }
 

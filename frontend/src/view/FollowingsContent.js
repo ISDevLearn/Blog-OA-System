@@ -9,7 +9,6 @@ function Followings(props) {
 
     useEffect(() => {FollowService.getFollowings(username).then(
         res => {
-            console.log(res.data)
             setFollowingList(res.data)
         })},[])
 

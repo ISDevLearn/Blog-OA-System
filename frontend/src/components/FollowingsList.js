@@ -1,23 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import { Divider } from 'antd'
 import {SIDEBAR} from "./home/SideBar";
-import UserService from "../service/UserService";
-// import SvgIcon from '@/components/SvgIcon'
-// import ArticleTag from '@/components/ArticleTag'
 
 
 function FollowingsList(props) {
     const { followingList } = props
-    const [avatar, setAvatar] = useState([])
-    const username = ['kazuha']
-
-    useEffect(() => {UserService.getUserInfoList(username).then(
-        res => {
-            console.log('1', res)
-            setAvatar(res.data.avatar)
-        }
-    )}, [])
+    const [avatar, setAvatar] = useState(null)
 
     return (
         <ul className='app-home-list'>

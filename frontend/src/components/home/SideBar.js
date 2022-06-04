@@ -1,35 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import {history} from "../../utils/history";
-// import { SIDEBAR } from '@/config'
-
-// import { useSelector } from 'react-redux'
-
-// components
-import { Link } from 'react-router-dom'
-// import Href from '@/components/Href'
 import { Divider, Tag , Card} from 'antd'
 import { TeamOutlined } from '@ant-design/icons';
 import UserService from "../../service/UserService";
 import FollowService from "../../service/FollowService";
 
-import { Alert } from 'antd'
-// import { ANNOUNCEMENT } from '@/config'
-
-// import useFetchList from '@/hooks/useFetchList'
 
 export const SIDEBAR = {
     avatar: require('../../assets/images/paimon.jpg'), // 侧边栏头像
     // 关注的信息
-    follows: {
-        follower: {
-            link: 'https://test',
-            // icon: <GithubFill className='homepage-icon' />
-        },
-        following: {
-            link: 'https://test',
-            // icon: <SvgIcon type='iconjuejin' className='homepage-icon' />
-        }
-    },
     friendslink: {
         GitHub: {
             link: 'https://github.com/ISDevLearn/Blog-OA-System/',
@@ -44,18 +23,6 @@ export const SIDEBAR = {
 
 
 function SideBar(props) {
-    // const tagList = useSelector(state => state.article.tagList || [])
-
-    // const { dataList: articleList } = useFetchList({
-    //     withLoading: false,
-    //     requestUrl: '/article/list',
-    //     queryParams: {
-    //         order: 'viewCount DESC',
-    //         page: 1,
-    //         pageSize: 6,
-    //         type: true
-    //     }
-    // })
     const username = props.match.params.loginUsername
     const [email, setEmail] = useState()
     const [avatar, setAvatar] = useState()
@@ -63,7 +30,7 @@ function SideBar(props) {
     const [followingsNum, setFollowingsNum] = useState()
     useEffect(() => {UserService.getUserInfo(username).then(
         res => {
-            console.log(res)
+            // console.log(res)
             setEmail(res.data.email)
             setAvatar(res.data.avatar)
         }
@@ -71,13 +38,11 @@ function SideBar(props) {
 
     useEffect(() => {FollowService.getFollowers(username).then(
         res => {
-            // console.log(res.data)
             setFollowersNum(res.data.length)
         })},[])
 
     useEffect(() => {FollowService.getFollowings(username).then(
         res => {
-            // console.log(res.data)
             setFollowingsNum(res.data.length)
         })},[])
 
@@ -97,24 +62,12 @@ function SideBar(props) {
                 </Card>
             </ul>
 
-            {/*{ANNOUNCEMENT.enable && <Alert message={ANNOUNCEMENT.content} type='info' />}*/}
-
             <Divider orientation='left'>热门文章</Divider>
             <ul className='article-list'>
-                {/*{articleList.map(d => (*/}
-                {/*    <li key={d.id}>*/}
-                {/*        <Link to={`/article/${d.id}`}>{d.title}</Link>*/}
-                {/*    </li>*/}
-                {/*))}*/}
             </ul>
 
             <Divider orientation='left'>标签</Divider>
             <div className='tag-list'>
-                {/*{tagList.map((tag, i) => (*/}
-                {/*    <Tag key={i} color={tag.color}>*/}
-                {/*        <Link to={`/tags/${tag.name}`}>{tag.name}</Link>*/}
-                {/*    </Tag>*/}
-                {/*))}*/}
             </div>
 
             <Divider orientation='left'>友情连接</Divider>

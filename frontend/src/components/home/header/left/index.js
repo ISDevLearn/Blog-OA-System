@@ -2,11 +2,7 @@ import React, { useState } from 'react'
 import { Dropdown, Menu, Input, message, Icon } from 'antd'
 import { Link } from 'react-router-dom'
 import { useHistory, useLocation } from 'react-router-dom'
-
 import navList from '../right/NavList'
-
-// icon
-// import SvgIcon from '@/components/SvgIcon'
 import { MenuOutlined, SearchOutlined } from '@ant-design/icons'
 
 export const HEADER_BLOG_NAME = 'Blog'
@@ -59,7 +55,6 @@ const Index = props => {
 
     return (
         <div className='header-left'>
-            {/*<SvgIcon type='iconblog' style={{ color: '#055796', width: 16, height: 16, transform: 'translateY(-2px)' }} />*/}
             <span className='blog-name' onClick={e => history.push('/home')} >{HEADER_BLOG_NAME}</span>
             <Dropdown
                 overlayClassName='header-dropdown'

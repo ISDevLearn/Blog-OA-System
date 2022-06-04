@@ -12,7 +12,6 @@ const LoginForm = () => {
     // 用户点击登录后的回调
     // TODO: 登录的处理函数
     const onFinish = (values) => {
-        // console.log('Success:', values);
         AuthService.login(values.username, values.password).then(
             () => {
                 message.success("登录成功！", 1)
