@@ -10,6 +10,7 @@ import ArticleList from "../components/ArticleList";
 
 import { Empty, Spin } from 'antd'
 import BlogService from "../service/BlogService";
+import StarService from "../service/StarService";
 // import WebPagination from '@/components/Pagination'
 
 // hooks
@@ -36,13 +37,18 @@ function Home(props) {
     // const { keyword } = decodeQuery(props.location.search)
 
     //TODO
-    console.log(props)
     const username = props.match.params.loginUsername
     const [blogList, setBlogList] = useState([])
 
     useEffect(() => {BlogService.getBlogByUsername(username).then(
         res => {
-            console.log(res)
+            for (let dataKey in res.data) {
+                StarService.getStarsOfaBlog(res.data[dataKey].id).then(
+                    resres => {
+                        res.data[dataKey]['star'] = resres.data
+                    }
+                )
+            }
             setBlogList(res.data)
         })
         .catch(
