@@ -31,13 +31,13 @@ export const SIDEBAR = {
         }
     },
     friendslink: {
-        lizi: {
-            link: 'http://blog.liziyang.co/',
-            img: 'http://blog.liziyang.co/images/pikachu.jpg',
+        GitHub: {
+            link: 'https://github.com/ISDevLearn/Blog-OA-System/',
+            img: 'https://avatars.githubusercontent.com/u/9919?s=280&v=4',
         },
-        wizchen: {
-            link: 'http://blog.wizchen.com',
-            img: 'https://cdn.jsdelivr.net/gh/wizcheu/content1@main/img/header.gif'
+        水源文档: {
+            link: 'https://notes.sjtu.edu.cn/FgebUswgQf2iiUOKQYIhKQ?both',
+            img: 'https://th.bing.com/th/id/OIP.TreYqTLCwcL6u_HNe7tIQAD6D6?w=176&h=180&c=7&r=0&o=5&pid=1.7'
         }
     }
 }
@@ -92,7 +92,7 @@ function SideBar(props) {
             <ul className='home-pages'>
                 <Card style={{ width: 300 }}>
                     {/* TODO: 点击followers跳转到关注者界面，点击followings跳转到被关注者界面，*/}
-                    <li onClick={() => {history.push('')}}><TeamOutlined style={{ marginRight: 15 }} />{followersNum} followers</li>
+                    <li onClick={() => {history.push(`followers/`)}}><TeamOutlined style={{ marginRight: 15 }} />{followersNum} followers</li>
                     <li onClick={() => {history.push('')}}><TeamOutlined style={{ marginRight: 15 }} />{followingsNum} following</li>
                 </Card>
             </ul>
@@ -121,8 +121,8 @@ function SideBar(props) {
             <ul className='tag-list'>
                 {Object.entries(SIDEBAR.friendslink).map(([linkName, item]) => (
                     <li key={linkName}>
-                        {/*<img src={item.img} style={{height: '20px', width: '20px', marginRight: '10px'}} alt={'lizi'}/>*/}
-                        {/*<Href href={item.link}>{linkName}</Href>*/}
+                        <img src={item.img} style={{height: '20px', width: '20px', marginRight: '10px'}} alt={'lizi'}/>
+                        <a target='_blank' rel='noreferrer noopener'  href={item.link}>{linkName}</a>
                     </li>
                 ))}
             </ul>

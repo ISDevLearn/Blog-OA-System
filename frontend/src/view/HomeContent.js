@@ -51,11 +51,6 @@ function Home(props) {
         })
     }, [])
 
-
-    // const list = [{top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "2022-5-18"},
-    //     {top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "2022-5-18"},
-    //     {top: 0, id: 1, title: "雪よ舞え", content: "ayakakaka", viewcount: 1, createdAt: "2022-5-18"}]
-
     return (
         // <Spin tip='Loading...' spinning="1">
             <div className='app-home'>
