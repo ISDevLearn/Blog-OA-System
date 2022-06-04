@@ -7,6 +7,7 @@ import HomeContent from "../view/HomeContent";
 import ArticleContent from "../view/ArticleContent";
 import FollowersContent from "../view/FollowersContent";
 import FollowingsContent from "../view/FollowingsContent";
+import TextEditor from "../components/TextEditor";
 
 
 class IndexRouter extends React.Component {
@@ -19,6 +20,7 @@ class IndexRouter extends React.Component {
                         <Route path="/:loginUsername/home" component={HomeContent} exact/>
                         <Route path="/:loginUsername/followers" component={FollowersContent} exact/>
                         <Route path="/:loginUsername/followings" component={FollowingsContent} exact/>
+                        <Route path="/:loginUsername/post" component={TextEditor} exact/>
                         <Route path="/:loginUsername/article/:articleId" component={ArticleContent} exact/>
                         {/*<Redirect to={"/"+ username +"/home"}/>*/}
                     </switch>

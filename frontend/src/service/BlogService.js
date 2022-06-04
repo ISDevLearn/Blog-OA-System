@@ -1,5 +1,6 @@
 import axios from "axios";
 import authHeader from "./AuthHeader";
+import Qs from "qs";
 
 const API_URL = 'http://localhost:3000/blog';
 
@@ -22,6 +23,22 @@ class BlogService {
                 'id': id
             }
         })
+    }
+
+    postEdit(username, title, description, content) {
+        return axios
+            .post(API_URL + "/",
+                Qs.stringify({'username': username, 'title': title, 'description': description, 'content': content})
+                    ,{
+                    headers: authHeader(),
+                })
+            .then(response => {
+                if (response.data) {
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                }
+
+                return response.data;
+            });
     }
 }
 
