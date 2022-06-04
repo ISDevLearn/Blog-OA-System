@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 @RestController
 @RequestMapping("/user")
@@ -23,8 +25,10 @@ public class UserController {
 
     @PassToken
     @PostMapping("/")
-    public ResponseEntity<String> createUser(@Valid @RequestParam("username") String username, @RequestParam(value = "avatar", required = false) MultipartFile avatar, @Valid @Email @RequestParam("email") String email, @NotNull @RequestParam("password") String password) throws IOException {
-        userService.createUser(username, avatar == null ? null : avatar.getBytes(), email, password);
+    public ResponseEntity<String> createUser(@Valid @RequestParam("username") String username, @RequestParam(value = "avatar", required = false) MultipartFile avatar, @Valid @Email @RequestParam("email") String email, @NotNull @RequestParam("password") String password) throws IOException, NoSuchAlgorithmException {
+        SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+        String code = random.nextInt()+"";
+        userService.createUser(username, avatar == null ? null : avatar.getBytes(), email, password, code);
         return new ResponseEntity<>("Create the user successfully!", HttpStatus.OK);
     }
 

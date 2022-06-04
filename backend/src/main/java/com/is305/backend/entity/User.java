@@ -20,6 +20,7 @@ public class User implements Serializable {
     private Date created;
     private Date lastLogin;
     private byte[] token;
+    private String code;
 
     public void setStatus(boolean status) {
         this.status = status;

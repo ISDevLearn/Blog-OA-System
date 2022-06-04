@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `m_user`
     `created`    datetime                                               NOT NULL,
     `last_login` datetime                                               NOT NULL,
     `token`      binary(16)                                             NOT NULL,
+    `code`       varchar(64),
     PRIMARY KEY (`username`),
     KEY `UK_USERNAME` (`username`) USING BTREE,
     CONSTRAINT `m_user_chk_1` CHECK ((`status` < 2))
